@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Syne", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+    --font-mono: "DM Mono", monospace;
+    --radius: 0;
+
+    --background: 0.082 0.012 130;
+    --foreground: 0.91 0.03 135;
+    --card: 0.1 0.015 130;
+    --card-foreground: 0.91 0.03 135;
+    --popover: 0.1 0.015 130;
+    --popover-foreground: 0.91 0.03 135;
+
+    --primary: 0.88 0.2 137;
+    --primary-foreground: 0.082 0.012 130;
+
+    --secondary: 0.14 0.018 130;
+    --secondary-foreground: 0.91 0.03 135;
+    --muted: 0.14 0.018 130;
+    --muted-foreground: 0.55 0.04 130;
+
+    --accent: 0.88 0.2 137;
+    --accent-foreground: 0.082 0.012 130;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.082 0.012 130;
+
+    --border: 0.18 0.025 130;
+    --input: 0.18 0.025 130;
+    --ring: 0.88 0.2 137;
+
+    --chart-1: 0.88 0.2 137;
+    --chart-2: 0.6 0.12 185;
+    --chart-3: 0.4 0.07 227;
+    --chart-4: 0.83 0.19 84;
+    --chart-5: 0.77 0.19 70;
+
+    --sidebar: 0.1 0.015 130;
+    --sidebar-foreground: 0.91 0.03 135;
+    --sidebar-primary: 0.88 0.2 137;
+    --sidebar-primary-foreground: 0.082 0.012 130;
+    --sidebar-accent: 0.14 0.018 130;
+    --sidebar-accent-foreground: 0.91 0.03 135;
+    --sidebar-border: 0.18 0.025 130;
+    --sidebar-ring: 0.88 0.2 137;
+  }
+
+  .dark {
+    --background: 0.082 0.012 130;
+    --foreground: 0.91 0.03 135;
+    --card: 0.1 0.015 130;
+    --card-foreground: 0.91 0.03 135;
+    --popover: 0.1 0.015 130;
+    --popover-foreground: 0.91 0.03 135;
+
+    --primary: 0.88 0.2 137;
+    --primary-foreground: 0.082 0.012 130;
+
+    --secondary: 0.14 0.018 130;
+    --secondary-foreground: 0.91 0.03 135;
+    --muted: 0.14 0.018 130;
+    --muted-foreground: 0.55 0.04 130;
+
+    --accent: 0.88 0.2 137;
+    --accent-foreground: 0.082 0.012 130;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.082 0.012 130;
+
+    --border: 0.18 0.025 130;
+    --input: 0.18 0.025 130;
+    --ring: 0.88 0.2 137;
+
+    --chart-1: 0.49 0.24 264;
+    --chart-2: 0.7 0.17 162;
+    --chart-3: 0.77 0.19 70;
+    --chart-4: 0.63 0.27 304;
+    --chart-5: 0.65 0.25 16;
+
+    --sidebar: 0.1 0.015 130;
+    --sidebar-foreground: 0.91 0.03 135;
+    --sidebar-primary: 0.88 0.2 137;
+    --sidebar-primary-foreground: 0.082 0.012 130;
+    --sidebar-accent: 0.14 0.018 130;
+    --sidebar-accent-foreground: 0.91 0.03 135;
+    --sidebar-border: 0.18 0.025 130;
+    --sidebar-ring: 0.88 0.2 137;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "DM Sans", sans-serif;
+    background-color: #080c08;
+    color: #e8f5e6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Scroll reveal animations */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  /* Font helpers */
+  .font-display {
+    font-family: "Syne", sans-serif;
+  }
+
+  .font-body {
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .font-label {
+    font-family: "DM Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Section separator */
+  .section-divider {
+    border-top: 1px solid #1e2e1c;
+  }
+
+  /* WhatsApp pulse ring */
+  @keyframes wa-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(122, 255, 110, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 12px rgba(122, 255, 110, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(122, 255, 110, 0);
+    }
+  }
+
+  .wa-pulse {
+    animation: wa-pulse 2.5s ease-in-out infinite;
+  }
+
+  /* Availability pulse dot */
+  @keyframes avail-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .avail-dot {
+    animation: avail-blink 2s ease-in-out infinite;
+  }
+}

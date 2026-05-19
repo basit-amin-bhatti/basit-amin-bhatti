@@ -1,0 +1,26 @@
+{
+  "overview": "Premium personal branding CV website for Basit Amin Bhatti — Shopify CRO and AI Automation specialist. Dark editorial design with sharp typography, scroll-reveal animations, and WhatsApp integration throughout.",
+  "features": [
+    "Dark editorial design with #080C08 background and #7AFF6E accent",
+    "Fixed navbar with WhatsApp CTA",
+    "Hero section with professional headshot, key stats, and primary CTA",
+    "Skills grid with proficiency ratings across 15 skills",
+    "Experience timeline with three roles",
+    "Services section with four offerings",
+    "Tools directory organized by category",
+    "Floating WhatsApp button with pulse animation",
+    "Scroll-reveal animations via IntersectionObserver",
+    "Fully responsive layout optimized for mobile below 900px"
+  ],
+  "category": "portfolio",
+  "tags": [
+    "personal-branding",
+    "cv",
+    "portfolio",
+    "dark-theme",
+    "shopify",
+    "ai-automation",
+    "whatsapp"
+  ],
+  "last_updated": "2026-05-18T12:23:38.444Z"
+}
