@@ -1,4 +1,3 @@
-import { fileURLToPath, URL } from "url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import environment from "vite-plugin-environment";
@@ -48,11 +47,11 @@ export default defineConfig({
     alias: [
       {
         find: "declarations",
-        replacement: fileURLToPath(new URL("../declarations", import.meta.url)),
+        replacement: `${process.cwd()}/declarations`,
       },
       {
         find: "@",
-        replacement: fileURLToPath(new URL("./src", import.meta.url)),
+        replacement: `${process.cwd()}/src`,
       },
     ],
     dedupe: ["@dfinity/agent"]

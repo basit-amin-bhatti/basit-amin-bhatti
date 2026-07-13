@@ -1,116 +1,84 @@
-import { navLinks, personalInfo } from "@/data/cv-data";
+import { siteContent } from "@/data/siteContent";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+
+const navItems = [
+  { label: "Services", href: "/#services" },
+  { label: "Work", href: "/#work" },
+  { label: "Process", href: "/#process" },
+  { label: "Contact", href: "/#contact" },
+];
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav
-      data-ocid="navbar"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        backgroundColor: "#080C08",
-        borderBottom: "1px solid #1E2E1C",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 2rem",
-        height: "64px",
-      }}
-    >
-      {/* Left: Name + subtitle */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-        <span
-          style={{
-            fontFamily: "Syne, sans-serif",
-            fontWeight: 700,
-            fontSize: "1rem",
-            color: "#E8F5E6",
-            letterSpacing: "0.02em",
-            lineHeight: 1.1,
-          }}
+    <header className="simple-header">
+      <nav className="container simple-nav" aria-label="Primary navigation">
+        <a
+          className="simple-brand"
+          href="/"
+          aria-label="Basit Amin Bhatti home"
         >
-          {personalInfo.name}
-        </span>
-        <span
-          style={{
-            fontFamily: "DM Mono, monospace",
-            fontSize: "0.6rem",
-            color: "#7AFF6E",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-          }}
+          <strong>{siteContent.brand.name}</strong>
+          <span>{siteContent.brand.primaryTitle}</span>
+        </a>
+
+        <div className="simple-nav__links" aria-label="Homepage sections">
+          {navItems.map((item) => (
+            <a href={item.href} key={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        <a
+          aria-label="Book a Free Consultation"
+          className="btn btn--primary simple-nav__cta"
+          data-cta="book-free-consultation"
+          href="/#contact"
         >
-          CRO & AI Automation
-        </span>
-      </div>
+          Book Free Consultation
+        </a>
 
-      {/* Center: Nav links (hidden on mobile) */}
-      <div className="nav-links" style={{ display: "flex", gap: "2rem" }}>
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            data-ocid={`navbar.${link.label.toLowerCase()}_link`}
-            style={{
-              fontFamily: "DM Mono, monospace",
-              fontSize: "0.7rem",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "#8A9E88",
-              textDecoration: "none",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.color = "#7AFF6E";
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.color = "#8A9E88";
-            }}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+        <button
+          aria-controls="mobile-navigation"
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          className="simple-nav__menu"
+          onClick={() => setIsOpen((current) => !current)}
+          type="button"
+        >
+          {isOpen ? (
+            <X aria-hidden="true" size={21} />
+          ) : (
+            <Menu aria-hidden="true" size={21} />
+          )}
+        </button>
+      </nav>
 
-      {/* Right: WhatsApp CTA */}
-      <a
-        href={personalInfo.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-ocid="navbar.whatsapp_button"
-        style={{
-          fontFamily: "DM Mono, monospace",
-          fontSize: "0.65rem",
-          letterSpacing: "0.14em",
-          textTransform: "uppercase",
-          backgroundColor: "#7AFF6E",
-          color: "#080C08",
-          fontWeight: 700,
-          padding: "8px 16px",
-          textDecoration: "none",
-          borderRadius: 0,
-          border: "none",
-          display: "inline-block",
-          transition: "background-color 0.2s",
-          whiteSpace: "nowrap",
-        }}
-        onMouseEnter={(e) => {
-          (e.target as HTMLElement).style.backgroundColor = "#5FD95A";
-        }}
-        onMouseLeave={(e) => {
-          (e.target as HTMLElement).style.backgroundColor = "#7AFF6E";
-        }}
-      >
-        Hire Me
-      </a>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .nav-links { display: none !important; }
-        }
-      `}</style>
-    </nav>
+      {isOpen ? (
+        <div className="simple-mobile-menu" id="mobile-navigation">
+          <div className="container">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                key={item.href}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              className="btn btn--primary"
+              data-cta="book-free-consultation"
+              href="/#contact"
+            >
+              Book Free Consultation
+            </a>
+          </div>
+        </div>
+      ) : null}
+    </header>
   );
 }
