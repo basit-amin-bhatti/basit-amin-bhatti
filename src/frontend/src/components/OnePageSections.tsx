@@ -24,6 +24,10 @@ export function HomeServicesSection() {
         <div className="simple-card-grid simple-card-grid--services">
           {siteContent.services.map((service, index) => {
             const Icon = serviceIcons[index] ?? Code2;
+            const serviceImageSmall = service.image.replace(
+              /\.webp$/i,
+              "-640.webp",
+            );
 
             return (
               <article className="simple-card service-summary" key={service.id}>
@@ -31,8 +35,12 @@ export function HomeServicesSection() {
                   <img
                     alt={service.imageAlt}
                     decoding="async"
+                    height="1086"
                     loading="lazy"
-                    src={service.image}
+                    sizes="(max-width: 800px) calc(100vw - 2.5rem), 50vw"
+                    src={serviceImageSmall}
+                    srcSet={`${serviceImageSmall} 640w, ${service.image} 1448w`}
+                    width="1448"
                   />
                 </div>
                 <div className="simple-card__icon" aria-hidden="true">

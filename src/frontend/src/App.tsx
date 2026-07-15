@@ -1,3 +1,4 @@
+import { BrandMarquee } from "@/components/BrandMarquee";
 import { CaseStudiesPage, CaseStudyDetailPage } from "@/components/CaseStudies";
 import { ContactPage, ContactSection } from "@/components/ContactSystem";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -10,10 +11,12 @@ import {
   HomeTechStackSection,
   HomeWorkSection,
 } from "@/components/OnePageSections";
+import { PortfolioSection } from "@/components/PortfolioSection";
 import {
   faqPageSchema,
   personSchema,
   professionalServiceSchema,
+  profilePageSchema,
   useSeoMetadata,
   websiteSchema,
 } from "@/components/Seo";
@@ -80,6 +83,7 @@ function HomePage() {
     jsonLd: [
       personSchema(),
       websiteSchema(),
+      profilePageSchema(),
       professionalServiceSchema(),
       faqPageSchema(siteContent.faqs),
     ],
@@ -90,7 +94,9 @@ function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <BrandMarquee />
         <HomeServicesSection />
+        <PortfolioSection />
         <HomeWorkSection />
         <HomeProcessSection />
         <HomeTechStackSection />

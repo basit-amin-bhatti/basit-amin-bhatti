@@ -1,7 +1,9 @@
 import { siteContent } from "@/data/siteContent";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-const portraitSrc = "/assets/images/basit-amin-bhatti-ai-automation.png";
+const portraitSrc = "/assets/images/basit-amin-bhatti-hero-neon-640.webp";
+const portraitSrcSet =
+  "/assets/images/basit-amin-bhatti-hero-neon-640.webp 640w, /assets/images/basit-amin-bhatti-hero-neon-1024.webp 1024w";
 
 export default function Hero() {
   return (
@@ -42,9 +44,11 @@ export default function Hero() {
             alt="Basit Amin Bhatti, AI Website and Automation Builder"
             decoding="async"
             fetchPriority="high"
-            height="800"
+            height="1536"
             src={portraitSrc}
-            width="800"
+            sizes="(max-width: 900px) min(100vw - 2.5rem, 30rem), 36vw"
+            srcSet={portraitSrcSet}
+            width="1024"
           />
           <div className="home-hero__portrait-label">
             <strong>Basit Amin Bhatti</strong>

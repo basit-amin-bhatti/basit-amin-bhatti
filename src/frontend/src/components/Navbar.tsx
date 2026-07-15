@@ -1,9 +1,10 @@
 import { siteContent } from "@/data/siteContent";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Services", href: "/#services" },
+  { label: "Portfolio", href: "/#portfolio" },
   { label: "Work", href: "/#work" },
   { label: "Process", href: "/#process" },
   { label: "Contact", href: "/#contact" },
@@ -12,73 +13,109 @@ const navItems = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isOpen) {
+      document.body.classList.remove("mobile-menu-open");
+      return;
+    }
+
+    document.body.classList.add("mobile-menu-open");
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.classList.remove("mobile-menu-open");
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
-    <header className="simple-header">
-      <nav className="container simple-nav" aria-label="Primary navigation">
-        <a
-          className="simple-brand"
-          href="/"
-          aria-label="Basit Amin Bhatti home"
-        >
-          <strong>{siteContent.brand.name}</strong>
-          <span>{siteContent.brand.primaryTitle}</span>
-        </a>
-
-        <div className="simple-nav__links" aria-label="Homepage sections">
-          {navItems.map((item) => (
-            <a href={item.href} key={item.href}>
-              {item.label}
-            </a>
-          ))}
-        </div>
-
-        <a
-          aria-label="Book a Free Consultation"
-          className="btn btn--primary simple-nav__cta"
-          data-cta="book-free-consultation"
-          href="/#contact"
-        >
-          Book Free Consultation
-        </a>
-
-        <button
-          aria-controls="mobile-navigation"
-          aria-expanded={isOpen}
-          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-          className="simple-nav__menu"
-          onClick={() => setIsOpen((current) => !current)}
-          type="button"
-        >
-          {isOpen ? (
-            <X aria-hidden="true" size={21} />
-          ) : (
-            <Menu aria-hidden="true" size={21} />
-          )}
-        </button>
-      </nav>
-
+    <>
       {isOpen ? (
-        <div className="simple-mobile-menu" id="mobile-navigation">
-          <div className="container">
+        <button
+          aria-hidden="true"
+          className="mobile-menu-backdrop"
+          onClick={() => setIsOpen(false)}
+          tabIndex={-1}
+          type="button"
+        />
+      ) : null}
+
+      <header className="simple-header">
+        <nav className="container simple-nav" aria-label="Primary navigation">
+          <a
+            className="simple-brand"
+            href="/"
+            aria-label="Basit Amin Bhatti home"
+          >
+            <strong>{siteContent.brand.name}</strong>
+            <span>{siteContent.brand.primaryTitle}</span>
+          </a>
+
+          <div className="simple-nav__links" aria-label="Homepage sections">
             {navItems.map((item) => (
-              <a
-                href={item.href}
-                key={item.href}
-                onClick={() => setIsOpen(false)}
-              >
+              <a href={item.href} key={item.href}>
                 {item.label}
               </a>
             ))}
-            <a
-              className="btn btn--primary"
-              data-cta="book-free-consultation"
-              href="/#contact"
-            >
-              Book Free Consultation
-            </a>
           </div>
-        </div>
-      ) : null}
-    </header>
+
+          <a
+            aria-label="Book a Free Consultation"
+            className="btn btn--primary simple-nav__cta"
+            data-cta="book-free-consultation"
+            href="/#contact"
+          >
+            Book Free Consultation
+          </a>
+
+          <button
+            aria-controls="mobile-navigation"
+            aria-expanded={isOpen}
+            aria-label={
+              isOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            className="simple-nav__menu"
+            onClick={() => setIsOpen((current) => !current)}
+            type="button"
+          >
+            {isOpen ? (
+              <X aria-hidden="true" size={21} />
+            ) : (
+              <Menu aria-hidden="true" size={21} />
+            )}
+          </button>
+        </nav>
+
+        {isOpen ? (
+          <div className="simple-mobile-menu" id="mobile-navigation">
+            <div className="container">
+              {navItems.map((item) => (
+                <a
+                  href={item.href}
+                  key={item.href}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                className="btn btn--primary"
+                data-cta="book-free-consultation"
+                href="/#contact"
+              >
+                Book Free Consultation
+              </a>
+            </div>
+          </div>
+        ) : null}
+      </header>
+    </>
   );
 }

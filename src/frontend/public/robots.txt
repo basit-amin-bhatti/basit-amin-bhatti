@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://basitaminbhatti.com/sitemap.xml
+Sitemap: https://basit-amin-bhatti.vercel.app/sitemap.xml

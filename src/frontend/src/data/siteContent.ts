@@ -1,16 +1,18 @@
 export const siteContent = {
   seo: {
-    siteUrl: "https://basitaminbhatti.com",
-    title: "Basit Amin Bhatti \u2014 AI Website & Automation Builder",
-    homepageTitle: "Basit Amin Bhatti \u2014 AI Website & Automation Builder",
+    siteUrl: "https://basit-amin-bhatti.vercel.app",
+    title: "Basit Amin Bhatti | AI Website & Automation Builder",
+    homepageTitle: "Basit Amin Bhatti | AI Website & Automation Builder",
     description:
-      "I help businesses, agencies, ecommerce brands, and founders launch conversion-focused websites, SaaS dashboards, Shopify pages, and AI automation workflows faster with human-reviewed execution.",
+      "Basit Amin Bhatti builds AI-powered websites, SaaS dashboards, Shopify CRO improvements, and automation workflows for businesses that want to launch faster and operate smarter.",
     homepageDescription:
-      "AI-powered websites, SaaS dashboards, Shopify CRO improvements, and automation workflows built for businesses that want to launch faster and operate smarter.",
+      "Basit Amin Bhatti builds AI-powered websites, SaaS dashboards, Shopify CRO improvements, and automation workflows for businesses that want to launch faster and operate smarter.",
     ogImage: "/og-image.svg",
-    ogTitle: "AI-Powered Websites & Automations for Businesses",
+    ogTitle: "Basit Amin Bhatti | AI Website & Automation Builder",
     ogDescription:
-      "AI-powered website development, SaaS dashboards, AI solutions, Shopify CRO, and n8n automation workflows for businesses.",
+      "Official website of Basit Amin Bhatti — AI Website & Automation Builder specializing in AI-powered websites, SaaS solutions, Shopify CRO, and n8n automation workflows.",
+    ogImageAlt:
+      "Basit Amin Bhatti, AI Website and Automation Builder for businesses",
   },
   brand: {
     name: "Basit Amin Bhatti",
@@ -24,7 +26,7 @@ export const siteContent = {
     eyebrow: "AI Website & Automation Builder",
     headline: "AI-Powered Websites, SaaS & Automations",
     subheadline:
-      "I build modern websites, landing pages, SaaS dashboards, AI tools, Shopify improvements, and automation workflows that help businesses launch faster and operate smarter.",
+      "Basit Amin Bhatti builds modern websites, landing pages, SaaS dashboards, AI tools, Shopify improvements, and automation workflows that help businesses launch faster and operate smarter.",
     proofBullets: [
       "Conversion websites, landing pages & SaaS dashboards",
       "Shopify CRO pages built around buyer trust",

@@ -30,6 +30,8 @@ export function useSeoMetadata({
     const image = absoluteUrl(siteContent.seo.ogImage);
 
     document.title = title;
+    setMetaTag("application-name", siteContent.brand.name);
+    setMetaTag("author", siteContent.brand.name);
     setMetaTag("description", description);
     setMetaTag("robots", "index, follow");
 
@@ -39,14 +41,18 @@ export function useSeoMetadata({
     setMetaTag("og:description", description, "property");
     setMetaTag("og:url", url, "property");
     setMetaTag("og:image", image, "property");
-    setMetaTag("og:image:alt", siteContent.seo.ogTitle, "property");
+    setMetaTag("og:image:alt", siteContent.seo.ogImageAlt, "property");
+    setMetaTag("og:image:width", "1200", "property");
+    setMetaTag("og:image:height", "630", "property");
+    setMetaTag("og:image:type", "image/svg+xml", "property");
     setMetaTag("og:locale", "en_US", "property");
 
     setMetaTag("twitter:card", "summary_large_image");
     setMetaTag("twitter:title", title);
     setMetaTag("twitter:description", description);
+    setMetaTag("twitter:url", url);
     setMetaTag("twitter:image", image);
-    setMetaTag("twitter:image:alt", siteContent.seo.ogTitle);
+    setMetaTag("twitter:image:alt", siteContent.seo.ogImageAlt);
 
     setCanonical(url);
     setJsonLd(jsonLd);
@@ -54,15 +60,7 @@ export function useSeoMetadata({
 }
 
 export function getBaseUrl() {
-  if (typeof window === "undefined") {
-    return siteContent.seo.siteUrl;
-  }
-
-  if (window.location.protocol === "file:") {
-    return siteContent.seo.siteUrl;
-  }
-
-  return window.location.origin;
+  return siteContent.seo.siteUrl;
 }
 
 export function absoluteUrl(path: string) {
@@ -70,17 +68,34 @@ export function absoluteUrl(path: string) {
     return path;
   }
 
-  return `${getBaseUrl()}${path.startsWith("/") ? path : `/${path}`}`;
+  return new URL(
+    path.startsWith("/") ? path : `/${path}`,
+    getBaseUrl(),
+  ).toString();
 }
 
 export function personSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": absoluteUrl("/#person"),
     name: siteContent.brand.name,
     jobTitle: siteContent.brand.primaryTitle,
     description: siteContent.seo.description,
     url: absoluteUrl("/"),
+    image: absoluteUrl("/assets/images/basit-amin-bhatti-ai-automation.webp"),
+    knowsAbout: [
+      "AI Website Development",
+      "SaaS & AI Solutions",
+      "Shopify Ecommerce CRO",
+      "n8n Workflows",
+      "Web Automation",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "OpenAI",
+      "APIs",
+    ],
     sameAs: [personalInfo.linkedin].filter(Boolean),
   };
 }
@@ -89,9 +104,27 @@ export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": absoluteUrl("/#website"),
     name: siteContent.brand.name,
     description: siteContent.seo.description,
     url: absoluteUrl("/"),
+    publisher: {
+      "@id": absoluteUrl("/#person"),
+    },
+  };
+}
+
+export function profilePageSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": absoluteUrl("/#profile"),
+    name: `${siteContent.brand.name} | ${siteContent.brand.primaryTitle}`,
+    description: siteContent.seo.description,
+    url: absoluteUrl("/"),
+    mainEntity: {
+      "@id": absoluteUrl("/#person"),
+    },
   };
 }
 
@@ -116,8 +149,7 @@ export function professionalServiceSchema() {
       "n8n automation",
     ],
     provider: {
-      "@type": "Person",
-      name: siteContent.brand.name,
+      "@id": absoluteUrl("/#person"),
     },
   };
 }
