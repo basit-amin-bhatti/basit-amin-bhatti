@@ -63,7 +63,7 @@ function PortfolioRow({
             >
               <div className="portfolio-card__image">
                 <img
-                  alt={`${item.name} portfolio project`}
+                  alt={`${item.name} website project by Basit Amin Bhatti`}
                   decoding="async"
                   height="720"
                   loading="lazy"

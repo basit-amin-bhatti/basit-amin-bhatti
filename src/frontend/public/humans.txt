@@ -1,0 +1,12 @@
+/* PERSON */
+Name: Basit Amin Bhatti
+Role: AI Website & Automation Builder
+Location: Punjab, Pakistan
+Contact: abbhatti504@gmail.com
+Website: https://www.basitaminbhatti.me/
+LinkedIn: https://www.linkedin.com/in/basit-amin-bhatti/
+
+/* SITE */
+Language: English
+Focus: AI-powered websites, web apps, Shopify CRO, AI agents, and n8n automation
+Standards: Semantic HTML, accessibility, responsive design, and structured data

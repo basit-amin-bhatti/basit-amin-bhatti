@@ -1,0 +1,48 @@
+# Basit Amin Bhatti
+
+> Official personal website and canonical identity of Basit Amin Bhatti, also known as Basit Bhatti and Basit Amin.
+
+Basit Amin Bhatti is a Pakistan-based AI Website & Automation Builder, full-stack developer, and automation consultant. He helps agencies, ecommerce brands, startup founders, consultants, coaches, local service businesses, and small businesses launch AI-powered websites, web apps, Shopify experiences, AI agents, and business automation workflows.
+
+## Canonical identity
+
+- Name: Basit Amin Bhatti
+- Alternate names: Basit Bhatti; Basit Amin
+- Website: https://www.basitaminbhatti.me/
+- Location: Punjab, Pakistan
+- Email: mailto:abbhatti504@gmail.com
+- LinkedIn: https://www.linkedin.com/in/basit-amin-bhatti/
+
+## Professional focus
+
+- AI-powered website development
+- Full-stack React and Next.js web apps
+- SaaS and AI solutions
+- AI agent development and API integrations
+- n8n workflow automation and business automation
+- Shopify development, ecommerce UX, and conversion-rate optimization
+- AI-assisted development with human-reviewed quality
+
+## Services
+
+- [AI Website Development](https://www.basitaminbhatti.me/services/ai-website-development): Conversion-focused websites and landing pages for businesses.
+- [SaaS & AI Solutions](https://www.basitaminbhatti.me/services/vibe-coded-mvp): AI-assisted dashboards, portals, tools, and business web apps reviewed for production quality.
+- [Shopify & Ecommerce CRO](https://www.basitaminbhatti.me/services/shopify-ecommerce-cro): Shopify pages, ecommerce UX, offer clarity, and conversion-focused improvements.
+- [AI Automation & n8n Workflows](https://www.basitaminbhatti.me/services/ai-automation): Lead routing, CRM updates, alerts, reporting, AI steps, APIs, and operational workflows.
+
+## Work and proof
+
+- [Case studies and demo concepts](https://www.basitaminbhatti.me/case-studies)
+- Portfolio items labeled as demo concepts or internal builds are not presented as verified client results.
+- No revenue claims, conversion-lift claims, or testimonials should be inferred unless explicitly published with evidence.
+
+## Contact
+
+- [Project consultation](https://www.basitaminbhatti.me/contact)
+- Email: abbhatti504@gmail.com
+- WhatsApp: https://wa.me/923214337294
+
+## Crawl resources
+
+- Sitemap: https://www.basitaminbhatti.me/sitemap.xml
+- Robots: https://www.basitaminbhatti.me/robots.txt

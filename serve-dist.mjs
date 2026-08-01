@@ -26,19 +26,29 @@ function log(message) {
 
 function resolveFile(urlPath) {
   const cleanPath = decodeURIComponent(urlPath.split("?")[0] || "/");
+  if (cleanPath === "/") {
+    return { file: join(root, "index.html"), statusCode: 200 };
+  }
+
   const normalized = normalize(cleanPath).replace(/^(\.\.[/\\])+/, "");
   const candidate = join(root, normalized);
 
   if (existsSync(candidate) && statSync(candidate).isFile()) {
-    return candidate;
+    return { file: candidate, statusCode: 200 };
   }
 
-  return join(root, "index.html");
+  const cleanUrlCandidate = `${candidate}.html`;
+  if (existsSync(cleanUrlCandidate) && statSync(cleanUrlCandidate).isFile()) {
+    return { file: cleanUrlCandidate, statusCode: 200 };
+  }
+
+  return { file: join(root, "404.html"), statusCode: 404 };
 }
 
 createServer((req, res) => {
   try {
-    const file = resolveFile(req.url || "/");
+    const { file, statusCode } = resolveFile(req.url || "/");
+    res.statusCode = statusCode;
     res.setHeader("Content-Type", mimeTypes[extname(file)] || "application/octet-stream");
     createReadStream(file).pipe(res);
   } catch (error) {

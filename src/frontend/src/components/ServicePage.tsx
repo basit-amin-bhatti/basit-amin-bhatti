@@ -4,34 +4,17 @@ import {
   siteContent,
 } from "@/data/siteContent";
 import { ArrowRight, Check, Home } from "lucide-react";
-import {
-  breadcrumbSchema,
-  faqPageSchema,
-  serviceSchema,
-  useSeoMetadata,
-} from "./Seo";
+import { usePageSeo } from "./Seo";
 
 export function ServicePage({ page }: { page: ServicePageContent }) {
-  useSeoMetadata({
-    title: page.metaTitle,
-    description: page.metaDescription,
-    path: page.path,
-    jsonLd: [
-      breadcrumbSchema([
-        { name: "Home", path: "/" },
-        { name: page.title, path: page.path },
-      ]),
-      serviceSchema(page),
-      faqPageSchema(page.faqs),
-    ],
-  });
+  usePageSeo(page.path);
 
   const relatedServices = page.related
     .map((slug) => servicePages.find((service) => service.slug === slug))
     .filter((service): service is ServicePageContent => Boolean(service));
 
   return (
-    <main>
+    <main id="main-content">
       <section className="service-hero">
         <div className="container service-hero__inner">
           <a className="breadcrumb-link" href="/">

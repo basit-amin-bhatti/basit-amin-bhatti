@@ -3,7 +3,7 @@ import { siteContent } from "@/data/siteContent";
 import { ArrowRight, Check, Home, Linkedin, Mail } from "lucide-react";
 import { type FormEvent, type ReactNode, useMemo, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { breadcrumbSchema, useSeoMetadata } from "./Seo";
+import { usePageSeo } from "./Seo";
 
 type ContactFormState = {
   name: string;
@@ -31,7 +31,7 @@ export function ContactPage() {
   useContactMetadata();
 
   return (
-    <main>
+    <main id="main-content">
       <section className="service-hero">
         <div className="container service-hero__inner">
           <a className="breadcrumb-link" href="/">
@@ -427,16 +427,5 @@ function createMailtoHref(form: ContactFormState) {
 }
 
 function useContactMetadata() {
-  useSeoMetadata({
-    title: "Contact Basit Amin Bhatti | Free Website & Automation Consultation",
-    description:
-      "Tell Basit what you want to build, improve, or automate. Request a free website and automation consultation for business websites, SaaS dashboards, AI solutions, Shopify CRO pages, and n8n workflows.",
-    path: "/contact",
-    jsonLd: [
-      breadcrumbSchema([
-        { name: "Home", path: "/" },
-        { name: "Contact", path: "/contact" },
-      ]),
-    ],
-  });
+  usePageSeo("/contact");
 }

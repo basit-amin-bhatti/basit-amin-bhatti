@@ -1,12 +1,29 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm --dir src/frontend build",
+  "outputDirectory": "src/frontend/dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "basitaminbhatti.me"
+        }
+      ],
+      "destination": "https://www.basitaminbhatti.me/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; media-src 'self'; worker-src 'self' blob:; frame-src 'none'; frame-ancestors 'none'; form-action 'self' mailto:; manifest-src 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com https://www.clarity.ms; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://*.clarity.ms https://c.bing.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; media-src 'self'; worker-src 'self' blob:; frame-src 'none'; frame-ancestors 'none'; form-action 'self' mailto:; manifest-src 'self'; upgrade-insecure-requests"
         },
         {
           "key": "Strict-Transport-Security",
@@ -33,16 +50,32 @@
           "value": "same-origin"
         },
         {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
+        },
+        {
           "key": "X-XSS-Protection",
           "value": "0"
         }
       ]
-    }
-  ],
-  "rewrites": [
+    },
     {
-      "source": "/(services|case-studies|contact)(.*)",
-      "destination": "/index.html"
+      "source": "/(assets|Portfolio|service-images)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(robots.txt|sitemap.xml|llms.txt|humans.txt|security.txt|manifest.json|browserconfig.xml)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
     }
   ]
 }

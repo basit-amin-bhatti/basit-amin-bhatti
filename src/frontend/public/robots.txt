@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://basit-amin-bhatti.vercel.app/sitemap.xml
+Sitemap: https://www.basitaminbhatti.me/sitemap.xml
+Host: www.basitaminbhatti.me

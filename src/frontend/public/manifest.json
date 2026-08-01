@@ -1,0 +1,26 @@
+{
+  "name": "Basit Amin Bhatti — AI Website & Automation Builder",
+  "short_name": "Basit Bhatti",
+  "description": "Official website of Basit Amin Bhatti, a Pakistan-based AI automation consultant and full-stack developer.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#030804",
+  "theme_color": "#05070d",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

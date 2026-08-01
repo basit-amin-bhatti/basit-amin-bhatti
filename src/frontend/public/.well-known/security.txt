@@ -1,0 +1,4 @@
+Contact: mailto:abbhatti504@gmail.com
+Canonical: https://www.basitaminbhatti.me/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-08-02T23:59:59Z

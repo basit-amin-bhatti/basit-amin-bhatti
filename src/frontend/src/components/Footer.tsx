@@ -15,10 +15,10 @@ export default function Footer() {
 
         <nav aria-label="Services">
           <strong>Services</strong>
-          <a href="/#services">AI Website Development</a>
-          <a href="/#services">Vibe-Coded SaaS & AI Solutions</a>
-          <a href="/#services">Shopify CRO</a>
-          <a href="/#services">AI Automation</a>
+          <a href="/services/ai-website-development">AI Website Development</a>
+          <a href="/services/vibe-coded-mvp">SaaS & AI Solutions</a>
+          <a href="/services/shopify-ecommerce-cro">Shopify CRO</a>
+          <a href="/services/ai-automation">AI Automation & n8n</a>
         </nav>
 
         <div className="simple-footer__contact">

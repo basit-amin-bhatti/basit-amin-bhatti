@@ -56,8 +56,8 @@ export function HomeServicesSection() {
                     </li>
                   ))}
                 </ul>
-                <a className="simple-link" href="/#contact">
-                  Discuss this
+                <a className="simple-link" href={service.href}>
+                  Explore {service.title}
                   <ArrowUpRight aria-hidden="true" size={16} />
                 </a>
               </article>

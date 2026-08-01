@@ -1,16 +1,16 @@
 export const siteContent = {
   seo: {
-    siteUrl: "https://basit-amin-bhatti.vercel.app",
-    title: "Basit Amin Bhatti | AI Website & Automation Builder",
-    homepageTitle: "Basit Amin Bhatti | AI Website & Automation Builder",
+    siteUrl: "https://www.basitaminbhatti.me",
+    title: "Basit Amin Bhatti | AI Automation & Web App Developer",
+    homepageTitle: "Basit Amin Bhatti | AI Automation & Web App Developer",
     description:
-      "Basit Amin Bhatti builds AI-powered websites, SaaS dashboards, Shopify CRO improvements, and automation workflows for businesses that want to launch faster and operate smarter.",
+      "Basit Amin Bhatti is a Pakistan-based AI automation consultant and full-stack developer for AI websites, web apps, Shopify, AI agents, and n8n workflows.",
     homepageDescription:
-      "Basit Amin Bhatti builds AI-powered websites, SaaS dashboards, Shopify CRO improvements, and automation workflows for businesses that want to launch faster and operate smarter.",
-    ogImage: "/og-image.svg",
-    ogTitle: "Basit Amin Bhatti | AI Website & Automation Builder",
+      "Basit Amin Bhatti is a Pakistan-based AI automation consultant and full-stack developer for AI websites, web apps, Shopify, AI agents, and n8n workflows.",
+    ogImage: "/og-image.png",
+    ogTitle: "Basit Amin Bhatti | AI Automation & Web App Developer",
     ogDescription:
-      "Official website of Basit Amin Bhatti — AI Website & Automation Builder specializing in AI-powered websites, SaaS solutions, Shopify CRO, and n8n automation workflows.",
+      "Official website of Basit Amin Bhatti, a Pakistan-based builder of AI-powered websites, web apps, Shopify experiences, AI agents, and n8n automations.",
     ogImageAlt:
       "Basit Amin Bhatti, AI Website and Automation Builder for businesses",
   },
@@ -18,15 +18,15 @@ export const siteContent = {
     name: "Basit Amin Bhatti",
     primaryTitle: "AI Website & Automation Builder",
     positioning:
-      "AI-powered web developer for websites, SaaS dashboards, ecommerce, AI solutions, and business automations.",
+      "Pakistan-based full-stack developer and automation consultant for AI-powered websites, web apps, ecommerce, AI agents, and business workflows.",
     promise:
       "AI-assisted speed. Human-reviewed quality. Business-focused execution.",
   },
   hero: {
-    eyebrow: "AI Website & Automation Builder",
-    headline: "AI-Powered Websites, SaaS & Automations",
+    eyebrow: "Basit Amin Bhatti · AI Website & Automation Builder",
+    headline: "AI-Powered Websites, Web Apps & Automations for Businesses",
     subheadline:
-      "Basit Amin Bhatti builds modern websites, landing pages, SaaS dashboards, AI tools, Shopify improvements, and automation workflows that help businesses launch faster and operate smarter.",
+      "I’m Basit Amin Bhatti, a Pakistan-based full-stack developer and automation consultant. I help agencies, ecommerce brands, founders, and service businesses launch conversion-focused websites, Shopify experiences, AI agents, and n8n workflow automations with AI-assisted speed and human-reviewed quality.",
     proofBullets: [
       "Conversion websites, landing pages & SaaS dashboards",
       "Shopify CRO pages built around buyer trust",
@@ -68,8 +68,8 @@ export const siteContent = {
     {
       id: "ai-website-development",
       title: "AI Website Development",
-      image: "/Services/AI Website Development.webp",
-      imageAlt: "AI Website Development service visual",
+      image: "/service-images/ai-website-development.webp",
+      imageAlt: "AI-powered website development service by Basit Amin Bhatti",
       description:
         "Professional websites and landing pages built for clarity, speed, and conversions.",
       deliverables: [
@@ -86,8 +86,8 @@ export const siteContent = {
     {
       id: "vibe-coded-mvp",
       title: "Vibe-Coded SaaS & AI Solutions",
-      image: "/Services/Vibe-Coded SaaS & AI Solutions.webp",
-      imageAlt: "Vibe-Coded SaaS and AI Solutions service visual",
+      image: "/service-images/saas-ai-solutions.webp",
+      imageAlt: "SaaS and AI web app development service by Basit Amin Bhatti",
       description:
         "Fast SaaS dashboards, AI tools, client portals, and business web apps built with AI-assisted development and reviewed for quality.",
       deliverables: [
@@ -104,8 +104,9 @@ export const siteContent = {
     {
       id: "shopify-ecommerce-cro",
       title: "Shopify & Ecommerce CRO",
-      image: "/Services/Shopify & Ecommerce CRO.webp",
-      imageAlt: "Shopify and Ecommerce CRO service visual",
+      image: "/service-images/shopify-ecommerce-cro.webp",
+      imageAlt:
+        "Shopify development and ecommerce CRO service by Basit Amin Bhatti",
       description:
         "Product pages, landing pages, UX improvements, and conversion-focused ecommerce sections.",
       deliverables: [
@@ -122,8 +123,9 @@ export const siteContent = {
     {
       id: "ai-automation",
       title: "AI Automation & n8n Workflows",
-      image: "/Services/AI Automation & n8n Workflows.webp",
-      imageAlt: "AI Automation and n8n Workflows service visual",
+      image: "/service-images/ai-automation-n8n-workflows.webp",
+      imageAlt:
+        "AI automation and n8n workflow consulting by Basit Amin Bhatti",
       description:
         "Automated lead routing, follow-ups, reporting, CRM updates, and AI-powered workflows.",
       deliverables: [

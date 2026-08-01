@@ -5,7 +5,7 @@ import {
   siteContent,
 } from "@/data/siteContent";
 import { ArrowRight, Check, Home } from "lucide-react";
-import { absoluteUrl, breadcrumbSchema, useSeoMetadata } from "./Seo";
+import { usePageSeo } from "./Seo";
 
 export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
   return (
@@ -36,20 +36,10 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
 }
 
 export function CaseStudiesPage() {
-  useCaseStudyMetadata(
-    "Case Studies, Demo Concepts & Proof | Basit Amin Bhatti",
-    "Honest demo concepts and internal builds showing AI website development, Shopify CRO, SaaS dashboard, AI solution, and automation thinking for clients.",
-    "/case-studies",
-    [
-      breadcrumbSchema([
-        { name: "Home", path: "/" },
-        { name: "Case Studies", path: "/case-studies" },
-      ]),
-    ],
-  );
+  usePageSeo("/case-studies");
 
   return (
-    <main>
+    <main id="main-content">
       <section className="service-hero">
         <div className="container service-hero__inner">
           <a className="breadcrumb-link" href="/">
@@ -111,34 +101,10 @@ export function CaseStudiesPage() {
 }
 
 export function CaseStudyDetailPage({ caseStudy }: { caseStudy: CaseStudy }) {
-  useCaseStudyMetadata(
-    `${caseStudy.title} | Basit Amin Bhatti`,
-    `${caseStudy.category} case-study concept: ${caseStudy.shortHeadline}`,
-    caseStudy.path,
-    [
-      breadcrumbSchema([
-        { name: "Home", path: "/" },
-        { name: "Case Studies", path: "/case-studies" },
-        { name: caseStudy.title, path: caseStudy.path },
-      ]),
-      {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        name: caseStudy.title,
-        description: caseStudy.shortHeadline,
-        url: absoluteUrl(caseStudy.path),
-        about: caseStudy.category,
-        creator: {
-          "@type": "Person",
-          name: siteContent.brand.name,
-          jobTitle: siteContent.brand.primaryTitle,
-        },
-      },
-    ],
-  );
+  usePageSeo(caseStudy.path);
 
   return (
-    <main>
+    <main id="main-content">
       <section className="service-hero">
         <div className="container service-hero__inner">
           <a className="breadcrumb-link" href="/case-studies">
@@ -344,13 +310,4 @@ function CodedMockup({
       </div>
     </div>
   );
-}
-
-function useCaseStudyMetadata(
-  title: string,
-  description: string,
-  path: string,
-  jsonLd: Parameters<typeof useSeoMetadata>[0]["jsonLd"] = [],
-) {
-  useSeoMetadata({ title, description, path, jsonLd });
 }

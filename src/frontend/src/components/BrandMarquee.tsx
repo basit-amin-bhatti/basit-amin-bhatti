@@ -34,7 +34,7 @@ export function BrandMarquee() {
     <section className="brand-marquee" aria-labelledby="portfolio-brands-title">
       <div className="container">
         <h2 id="portfolio-brands-title">
-          Trusted by brands across 4 countries
+          Selected ecommerce and technology work
         </h2>
       </div>
 

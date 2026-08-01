@@ -10,7 +10,7 @@ export default function Hero() {
     <section className="home-hero" id="hero">
       <div className="container home-hero__grid">
         <div className="home-hero__copy">
-          <p className="simple-eyebrow">AI Website & Automation Builder</p>
+          <p className="simple-eyebrow">{siteContent.hero.eyebrow}</p>
           <h1>{siteContent.hero.headline}</h1>
           <p className="home-hero__lead">{siteContent.hero.subheadline}</p>
 
@@ -41,9 +41,8 @@ export default function Hero() {
 
         <div className="home-hero__portrait">
           <img
-            alt="Basit Amin Bhatti, AI Website and Automation Builder"
+            alt="Basit Amin Bhatti, AI automation consultant and full-stack developer from Pakistan"
             decoding="async"
-            fetchPriority="high"
             height="1536"
             src={portraitSrc}
             sizes="(max-width: 900px) min(100vw - 2.5rem, 30rem), 36vw"

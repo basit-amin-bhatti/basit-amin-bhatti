@@ -37,6 +37,9 @@ export default function Navbar() {
 
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
       {isOpen ? (
         <button
           aria-hidden="true"
