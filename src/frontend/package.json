@@ -5,10 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "pnpm build:client && pnpm build:ssr && pnpm prerender && pnpm copy:env",
-    "build:client": "vite build",
-    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
-    "prerender": "node scripts/prerender.mjs",
+    "build": "vite build && pnpm copy:env",
     "copy:env": "node -e \"require('fs').copyFileSync('env.json','dist/env.json')\"",
     "typecheck": "tsc --noEmit",
     "check": "biome check src",
