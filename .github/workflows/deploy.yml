@@ -1,0 +1,54 @@
+```yaml
+name: Manual Deploy to Hostinger (Vite)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch, tag, or commit to deploy"
+        required: false
+        default: "main"
+      clean:
+        description: "Delete remote files before upload? (true/false)"
+        required: false
+        default: "false"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Vite app
+        run: npm run build
+
+      - name: Show what is in dist/
+        run: ls -R dist
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          local-dir: dist/
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+          dangerous-clean-slate: ${{ inputs.clean }}
+```
