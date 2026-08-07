@@ -1,54 +1,95 @@
-```yaml
-name: Manual Deploy to Hostinger (Vite)
+name: Deploy Website to Hostinger
 
 on:
   workflow_dispatch:
     inputs:
       ref:
         description: "Branch, tag, or commit to deploy"
-        required: false
+        required: true
         default: "main"
+        type: string
       clean:
-        description: "Delete remote files before upload? (true/false)"
-        required: false
-        default: "false"
+        description: "Delete existing files from the remote directory first"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-production-deployment
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
+    name: Build and deploy production website
     runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout selected version
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref }}
 
-      - name: Setup Node.js
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10
+          run_install: false
+
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
-      - name: Build Vite app
-        run: npm run build
+      - name: Typecheck frontend
+        run: pnpm --dir src/frontend typecheck
 
-      - name: Show what is in dist/
-        run: ls -R dist
+      - name: Check frontend formatting and lint
+        run: pnpm --dir src/frontend check
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Build production website
+        run: pnpm --dir src/frontend build
+        env:
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
+          BING_SITE_VERIFICATION: ${{ secrets.BING_SITE_VERIFICATION }}
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          CLARITY_PROJECT_ID: ${{ secrets.CLARITY_PROJECT_ID }}
+
+      - name: Verify deployment artifact
+        shell: bash
+        run: |
+          test -f src/frontend/dist/index.html
+          test -f src/frontend/dist/404.html
+          test -f src/frontend/dist/.htaccess
+          test -f src/frontend/dist/services/ai-website-development.html
+          test -f src/frontend/dist/services/vibe-coded-mvp.html
+          test -f src/frontend/dist/services/shopify-ecommerce-cro.html
+          test -f src/frontend/dist/services/ai-automation.html
+          test -n "$(find src/frontend/dist/assets -type f -name '*.js' -print -quit)"
+          test -n "$(find src/frontend/dist/assets -type f -name '*.css' -print -quit)"
+          echo "Deployment artifact verified."
+          find src/frontend/dist -maxdepth 3 -type f | sort
+
+      - name: Deploy to Hostinger using FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
+          port: 21
+          security: strict
+          timeout: 60000
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          local-dir: dist/
-          exclude: |
-            **/.git*
-            **/.github/**
-            **/node_modules/**
+          local-dir: src/frontend/dist/
           dangerous-clean-slate: ${{ inputs.clean }}
-```
+          log-level: standard
