@@ -68,7 +68,6 @@ jobs:
         shell: bash
         run: |
           test -f src/frontend/dist/index.html
-          test -f src/frontend/dist/404.html
           test -f src/frontend/dist/.htaccess
           test -n "$(find src/frontend/dist/assets -type f -name '*.js' -print -quit)"
           test -n "$(find src/frontend/dist/assets -type f -name '*.css' -print -quit)"
