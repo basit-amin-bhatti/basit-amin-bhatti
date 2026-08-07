@@ -71,7 +71,6 @@ jobs:
           test -f src/frontend/dist/404.html
           test -f src/frontend/dist/.htaccess
           test -f src/frontend/dist/services/ai-website-development.html
-          test -f src/frontend/dist/services/vibe-coded-mvp.html
           test -f src/frontend/dist/services/shopify-ecommerce-cro.html
           test -f src/frontend/dist/services/ai-automation.html
           test -n "$(find src/frontend/dist/assets -type f -name '*.js' -print -quit)"
