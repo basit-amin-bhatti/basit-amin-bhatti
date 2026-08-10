@@ -74,15 +74,14 @@ jobs:
           echo "Deployment artifact verified."
           find src/frontend/dist -maxdepth 3 -type f | sort
 
-      - name: Deploy to Hostinger using FTPS
+      - name: Deploy to Hostinger using FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           port: 21
-          security: strict
           timeout: 60000
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}
           local-dir: src/frontend/dist/
