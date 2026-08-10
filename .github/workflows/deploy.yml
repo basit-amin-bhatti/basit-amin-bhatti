@@ -25,7 +25,6 @@ jobs:
   build-and-deploy:
     name: Build and deploy production website
     runs-on: ubuntu-latest
-    environment: production
     timeout-minutes: 20
 
     steps:
@@ -73,6 +72,45 @@ jobs:
           test -n "$(find src/frontend/dist/assets -type f -name '*.css' -print -quit)"
           echo "Deployment artifact verified."
           find src/frontend/dist -maxdepth 3 -type f | sort
+
+            - name: Verify deployment artifact
+        shell: bash
+        run: |
+          test -f src/frontend/dist/index.html
+          test -f src/frontend/dist/.htaccess
+          test -n "$(find src/frontend/dist/assets -type f -name '*.js' -print -quit)"
+          test -n "$(find src/frontend/dist/assets -type f -name '*.css' -print -quit)"
+          echo "Deployment artifact verified."
+          find src/frontend/dist -maxdepth 3 -type f | sort
+
+      - name: Validate FTP configuration
+        shell: bash
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          if [ -z "$FTP_SERVER" ]; then
+            echo "ERROR: FTP_SERVER secret is empty."
+            exit 1
+          fi
+
+          if [ -z "$FTP_USERNAME" ]; then
+            echo "ERROR: FTP_USERNAME secret is empty."
+            exit 1
+          fi
+
+          if [ -z "$FTP_PASSWORD" ]; then
+            echo "ERROR: FTP_PASSWORD secret is empty."
+            exit 1
+          fi
+
+          if [[ ! "$FTP_SERVER" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "ERROR: FTP_SERVER is not formatted as a numeric IPv4 address."
+            exit 1
+          fi
+
+          echo "FTP secrets are present and FTP_SERVER format looks correct."
 
       - name: Deploy to Hostinger using FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
