@@ -2,7 +2,7 @@
 
 > Official personal website and canonical identity of Basit Amin Bhatti, also known as Basit Bhatti and Basit Amin.
 
-Basit Amin Bhatti is a Pakistan-based AI Website & Automation Builder, full-stack developer, and automation consultant. He helps agencies, ecommerce brands, startup founders, consultants, coaches, local service businesses, and small businesses launch AI-powered websites, web apps, Shopify experiences, AI agents, and business automation workflows.
+Basit Amin Bhatti is the Pakistan-based founder of BAVEXA and an AI Growth Partner for Roofing Companies. He helps U.S. roofing companies respond to leads faster, qualify opportunities, automate follow-up, update their CRM, and turn more inquiries into booked roof inspections. BAVEXA is his flagship AI lead-conversion system for roofing companies.
 
 ## Canonical identity
 
@@ -10,11 +10,16 @@ Basit Amin Bhatti is a Pakistan-based AI Website & Automation Builder, full-stac
 - Alternate names: Basit Bhatti; Basit Amin
 - Website: https://www.basitaminbhatti.me/
 - Location: Punjab, Pakistan
-- Email: mailto:abbhatti504@gmail.com
+- Email: mailto:hello@basitaminbhatti.me
 - LinkedIn: https://www.linkedin.com/in/basit-amin-bhatti/
 
 ## Professional focus
 
+- AI lead response and missed-call text-back for roofing companies
+- AI lead qualification by project type, urgency, location, and intent
+- Automated SMS and email follow-up
+- Roofing CRM automation and inspection booking
+- BAVEXA roofing lead-conversion systems
 - AI-powered website development
 - Full-stack React and Next.js web apps
 - SaaS and AI solutions
@@ -25,6 +30,10 @@ Basit Amin Bhatti is a Pakistan-based AI Website & Automation Builder, full-stac
 
 ## Services
 
+- AI Lead Response: Fast response to new roofing inquiries and missed calls.
+- AI Lead Qualification: Automated qualification of roofing opportunities.
+- Automated Follow-Up: Consistent SMS and email follow-up sequences.
+- Inspection Booking: Qualified leads routed into booked roof inspections.
 - [AI Website Development](https://www.basitaminbhatti.me/services/ai-website-development): Conversion-focused websites and landing pages for businesses.
 - [SaaS & AI Solutions](https://www.basitaminbhatti.me/services/vibe-coded-mvp): AI-assisted dashboards, portals, tools, and business web apps reviewed for production quality.
 - [Shopify & Ecommerce CRO](https://www.basitaminbhatti.me/services/shopify-ecommerce-cro): Shopify pages, ecommerce UX, offer clarity, and conversion-focused improvements.
@@ -39,7 +48,7 @@ Basit Amin Bhatti is a Pakistan-based AI Website & Automation Builder, full-stac
 ## Contact
 
 - [Project consultation](https://www.basitaminbhatti.me/contact)
-- Email: abbhatti504@gmail.com
+- Email: hello@basitaminbhatti.me
 - WhatsApp: https://wa.me/923214337294
 
 ## Crawl resources

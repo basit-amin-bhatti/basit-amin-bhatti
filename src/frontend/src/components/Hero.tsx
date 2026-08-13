@@ -10,7 +10,6 @@ export default function Hero() {
     <section className="home-hero" id="hero">
       <div className="container home-hero__grid">
         <div className="home-hero__copy">
-          <p className="simple-eyebrow">{siteContent.hero.eyebrow}</p>
           <h1>{siteContent.hero.headline}</h1>
           <p className="home-hero__lead">{siteContent.hero.subheadline}</p>
 
@@ -18,15 +17,16 @@ export default function Hero() {
             <a
               aria-label={siteContent.hero.primaryCta.label}
               className="btn btn--primary"
-              data-cta="book-free-consultation"
+              data-cta="book-free-roofing-growth-call"
               href={siteContent.hero.primaryCta.href}
             >
               {siteContent.hero.primaryCta.label}
               <ArrowRight aria-hidden="true" size={18} />
             </a>
             <a
+              aria-label={siteContent.hero.secondaryCta.label}
               className="btn btn--secondary"
-              data-cta="view-services"
+              data-cta="see-the-bavexa-system"
               href={siteContent.hero.secondaryCta.href}
             >
               {siteContent.hero.secondaryCta.label}
@@ -41,7 +41,7 @@ export default function Hero() {
 
         <div className="home-hero__portrait">
           <img
-            alt="Basit Amin Bhatti, AI automation consultant and full-stack developer from Pakistan"
+            alt="Basit Amin Bhatti, AI growth partner for roofing companies"
             decoding="async"
             height="1536"
             src={portraitSrc}
@@ -51,7 +51,7 @@ export default function Hero() {
           />
           <div className="home-hero__portrait-label">
             <strong>Basit Amin Bhatti</strong>
-            <span>Websites / SaaS / CRO / Automation</span>
+            <em>Founder, BAVEXA</em>
           </div>
         </div>
       </div>

@@ -1,15 +1,47 @@
-import { caseStudies, siteContent } from "@/data/siteContent";
+import { siteContent } from "@/data/siteContent";
 import {
-  ArrowUpRight,
   Bot,
+  CalendarDays,
   Check,
-  Code2,
-  Gauge,
-  Layers3,
-  Workflow,
+  CheckCircle2,
+  Clock3,
+  Mail,
+  MessageSquareText,
+  PhoneIncoming,
+  Sparkles,
+  UserCheck,
 } from "lucide-react";
 
-const serviceIcons = [Code2, Layers3, Gauge, Workflow];
+const roofingServices = [
+  {
+    id: "ai-lead-response",
+    title: "AI Lead Response",
+    description:
+      "Instantly responds to new roofing inquiries so hot leads don’t go cold.",
+    supportingFeature: "Missed Call Text-Back",
+  },
+  {
+    id: "ai-lead-qualification",
+    title: "AI Lead Qualification",
+    description:
+      "Automatically qualifies roofing leads based on project type, urgency, location, and intent.",
+    supportingFeature: "Project & Intent Scoring",
+  },
+  {
+    id: "automated-follow-up",
+    title: "Automated Follow-Up",
+    description:
+      "Consistently follows up with unresponsive leads through automated SMS and email sequences.",
+    supportingFeature: "SMS & Email Sequences",
+  },
+  {
+    id: "inspection-booking",
+    title: "Inspection Booking",
+    description:
+      "Converts qualified leads into booked roof inspections directly on the sales calendar.",
+    supportingFeature: "Roofing CRM Automation",
+  },
+] as const;
 
 export function HomeServicesSection() {
   return (
@@ -17,97 +49,166 @@ export function HomeServicesSection() {
       <div className="container">
         <SectionIntro
           eyebrow="Services"
-          title="What I Can Build For You"
-          description="Focused digital builds that make your offer clearer, your launch faster, and repetitive work easier to manage."
+          title="AI Growth Systems for Roofing Companies"
+          description="Four connected automations designed to help your team respond faster, focus on qualified opportunities, and book more roof inspections."
         />
 
         <div className="simple-card-grid simple-card-grid--services">
-          {siteContent.services.map((service, index) => {
-            const Icon = serviceIcons[index] ?? Code2;
-            const serviceImageSmall = service.image.replace(
-              /\.webp$/i,
-              "-640.webp",
-            );
-
-            return (
-              <article className="simple-card service-summary" key={service.id}>
-                <div className="service-summary__visual">
-                  <img
-                    alt={service.imageAlt}
-                    decoding="async"
-                    height="1086"
-                    loading="lazy"
-                    sizes="(max-width: 800px) calc(100vw - 2.5rem), 50vw"
-                    src={serviceImageSmall}
-                    srcSet={`${serviceImageSmall} 640w, ${service.image} 1448w`}
-                    width="1448"
-                  />
-                </div>
-                <div className="simple-card__icon" aria-hidden="true">
-                  <Icon size={21} strokeWidth={1.8} />
-                </div>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <ul className="simple-list">
-                  {service.deliverables.slice(0, 3).map((deliverable) => (
-                    <li key={deliverable}>
-                      <Check aria-hidden="true" size={15} />
-                      <span>{deliverable}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a className="simple-link" href={service.href}>
-                  Explore {service.title}
-                  <ArrowUpRight aria-hidden="true" size={16} />
-                </a>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function HomeWorkSection() {
-  return (
-    <section className="home-section home-section--muted" id="work">
-      <div className="container">
-        <SectionIntro
-          eyebrow="Work"
-          title="Selected Work & Demo Concepts"
-          description="Honest examples of how I approach website clarity, ecommerce conversion, and focused SaaS or AI solution delivery. No invented results or client claims."
-        />
-
-        <div className="simple-card-grid simple-card-grid--work">
-          {caseStudies.slice(0, 3).map((project) => (
-            <article className="simple-card work-summary" key={project.slug}>
-              <div className="work-summary__meta">
-                <span>{project.category}</span>
-                <strong>{project.statusLabel}</strong>
-              </div>
-              <h3>{project.title}</h3>
-              <div className="work-summary__detail">
-                <span>Problem</span>
-                <p>{project.problem}</p>
-              </div>
-              <div className="work-summary__detail">
-                <span>Solution</span>
-                <p>{project.solution}</p>
-              </div>
-              <div
-                className="simple-chips"
-                aria-label={`${project.title} tools`}
-              >
-                {project.tools.map((tool) => (
-                  <span key={tool}>{tool}</span>
-                ))}
+          {roofingServices.map((service) => (
+            <article
+              aria-labelledby={`${service.id}-title`}
+              className="simple-card roofing-service-card"
+              id={service.id}
+              key={service.id}
+            >
+              <RoofingServiceVisual serviceId={service.id} />
+              <h3 id={`${service.id}-title`}>{service.title}</h3>
+              <p>{service.description}</p>
+              <div className="roofing-service-card__feature">
+                <Check aria-hidden="true" size={15} strokeWidth={2.2} />
+                <span>{service.supportingFeature}</span>
               </div>
             </article>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function RoofingServiceVisual({
+  serviceId,
+}: {
+  serviceId: (typeof roofingServices)[number]["id"];
+}) {
+  if (serviceId === "ai-lead-response") {
+    return (
+      <div
+        aria-hidden="true"
+        className="roofing-service-visual roofing-service-visual--response"
+      >
+        <div className="roofing-service-visual__toolbar">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="roofing-response__lead">
+          <PhoneIncoming size={17} />
+          <div>
+            <strong>New roof inquiry</strong>
+            <span>Roof repair · Urgent</span>
+          </div>
+          <small>Now</small>
+        </div>
+        <div className="roofing-response__reply">
+          <Sparkles size={14} />
+          <span>Thanks for reaching out. Let’s arrange an inspection.</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (serviceId === "ai-lead-qualification") {
+    return (
+      <div
+        aria-hidden="true"
+        className="roofing-service-visual roofing-service-visual--qualification"
+      >
+        <div className="roofing-service-visual__toolbar">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="roofing-qualification__profile">
+          <div className="roofing-qualification__avatar">
+            <UserCheck size={18} />
+          </div>
+          <div>
+            <strong>Qualified opportunity</strong>
+            <span>Ready for sales follow-up</span>
+          </div>
+        </div>
+        <div className="roofing-qualification__criteria">
+          {["Project type", "Urgency", "Location", "Intent"].map(
+            (criterion) => (
+              <span key={criterion}>
+                <CheckCircle2 size={12} />
+                {criterion}
+              </span>
+            ),
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (serviceId === "automated-follow-up") {
+    return (
+      <div
+        aria-hidden="true"
+        className="roofing-service-visual roofing-service-visual--follow-up"
+      >
+        <div className="roofing-service-visual__toolbar">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="roofing-follow-up__flow">
+          <div className="roofing-follow-up__step is-active">
+            <MessageSquareText size={16} />
+            <span>SMS</span>
+            <small>Instant</small>
+          </div>
+          <div className="roofing-follow-up__line" />
+          <div className="roofing-follow-up__step">
+            <Mail size={16} />
+            <span>Email</span>
+            <small>Day 1</small>
+          </div>
+          <div className="roofing-follow-up__line" />
+          <div className="roofing-follow-up__step">
+            <MessageSquareText size={16} />
+            <span>SMS</span>
+            <small>Day 3</small>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      aria-hidden="true"
+      className="roofing-service-visual roofing-service-visual--booking"
+    >
+      <div className="roofing-service-visual__toolbar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="roofing-booking__layout">
+        <div className="roofing-booking__calendar">
+          <div>
+            <CalendarDays size={15} />
+            <strong>Available slots</strong>
+          </div>
+          <div className="roofing-booking__days">
+            {["16", "17", "18", "19", "20"].map((day) => (
+              <span className={day === "18" ? "is-selected" : ""} key={day}>
+                {day}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="roofing-booking__confirmed">
+          <CheckCircle2 size={18} />
+          <strong>Inspection booked</strong>
+          <span>
+            <Clock3 size={12} /> 10:30 AM
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -118,7 +219,7 @@ export function HomeProcessSection() {
         <SectionIntro
           eyebrow="Process"
           title="How I Work"
-          description="A straightforward path from the first review to a launch-ready website, SaaS or AI solution, ecommerce improvement, or automation."
+          description="A focused four-step process for turning roofing lead-flow gaps into a connected AI response, qualification, follow-up, and booking system."
         />
 
         <ol className="simple-process">
@@ -130,29 +231,6 @@ export function HomeProcessSection() {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-export function HomeTechStackSection() {
-  return (
-    <section className="home-section home-section--muted" id="tools">
-      <div className="container tools-layout">
-        <SectionIntro
-          eyebrow="Tools"
-          title="Tools I Work With"
-          description="A practical stack selected around the product, workflow, and launch goal."
-        />
-
-        <div
-          className="simple-chips simple-chips--tools"
-          aria-label="Tools I work with"
-        >
-          {siteContent.techStack.map((tool) => (
-            <span key={tool}>{tool}</span>
-          ))}
-        </div>
       </div>
     </section>
   );

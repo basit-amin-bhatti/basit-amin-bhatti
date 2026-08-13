@@ -1,10 +1,10 @@
 import { siteContent } from "@/data/siteContent";
+import { setupCalBooking } from "@/lib/calBooking";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Services", href: "/#services" },
-  { label: "Portfolio", href: "/#portfolio" },
   { label: "Work", href: "/#work" },
   { label: "Process", href: "/#process" },
   { label: "Contact", href: "/#contact" },
@@ -12,6 +12,20 @@ const navItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => setupCalBooking(), []);
+
+  useEffect(() => {
+    const updateHeaderState = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateHeaderState);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) {
@@ -50,7 +64,10 @@ export default function Navbar() {
         />
       ) : null}
 
-      <header className="simple-header">
+      <header
+        className={`simple-header${isScrolled ? " simple-header--floating" : ""}`}
+        data-scrolled={isScrolled ? "true" : "false"}
+      >
         <nav className="container simple-nav" aria-label="Primary navigation">
           <a
             className="simple-brand"
@@ -70,12 +87,12 @@ export default function Navbar() {
           </div>
 
           <a
-            aria-label="Book a Free Consultation"
+            aria-label="Book a Call →"
             className="btn btn--primary simple-nav__cta"
-            data-cta="book-free-consultation"
-            href="/#contact"
+            data-cta="book-free-roofing-growth-call"
+            href={siteContent.ctas.primary.href}
           >
-            Book Free Consultation
+            Book a Call →
           </a>
 
           <button
@@ -109,11 +126,12 @@ export default function Navbar() {
                 </a>
               ))}
               <a
+                aria-label="Book a Call →"
                 className="btn btn--primary"
-                data-cta="book-free-consultation"
-                href="/#contact"
+                data-cta="book-free-roofing-growth-call"
+                href={siteContent.ctas.primary.href}
               >
-                Book Free Consultation
+                Book a Call →
               </a>
             </div>
           </div>

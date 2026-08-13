@@ -15,14 +15,16 @@ export default function Footer() {
 
         <nav aria-label="Services">
           <strong>Services</strong>
-          <a href="/services/ai-website-development">AI Website Development</a>
-          <a href="/services/vibe-coded-mvp">SaaS & AI Solutions</a>
-          <a href="/services/shopify-ecommerce-cro">Shopify CRO</a>
-          <a href="/services/ai-automation">AI Automation & n8n</a>
+          <a href="/#ai-lead-response">AI Lead Response</a>
+          <a href="/#ai-lead-qualification">AI Lead Qualification</a>
+          <a href="/#automated-follow-up">Automated Follow-Up</a>
+          <a href="/#inspection-booking">Inspection Booking</a>
+          <a href="/#bavexa">BAVEXA</a>
         </nav>
 
         <div className="simple-footer__contact">
           <strong>Contact</strong>
+          <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
           <a
             href={personalInfo.whatsapp}
             rel="noopener noreferrer"
@@ -30,7 +32,6 @@ export default function Footer() {
           >
             WhatsApp: +923214337294
           </a>
-          <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
           <a
             href={personalInfo.linkedin}
             rel="noopener noreferrer"

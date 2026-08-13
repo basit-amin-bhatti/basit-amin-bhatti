@@ -1,31 +1,55 @@
-import { personalInfo } from "@/data/cv-data";
 import { siteContent } from "@/data/siteContent";
-import { ArrowRight, Check, Home, Linkedin, Mail } from "lucide-react";
-import { type FormEvent, type ReactNode, useMemo, useState } from "react";
-import { FaWhatsapp } from "react-icons/fa";
+import {
+  ArrowRight,
+  CheckCircle2,
+  CircleAlert,
+  Home,
+  LoaderCircle,
+  Map as MapIcon,
+  SearchCheck,
+  Workflow,
+} from "lucide-react";
+import { type FormEvent, type ReactNode, useState } from "react";
 import { usePageSeo } from "./Seo";
 
 type ContactFormState = {
   name: string;
   email: string;
   company: string;
-  need: string;
-  budget: string;
-  timeline: string;
+  website: string;
+  helpWith: string;
   message: string;
 };
 
 type FormErrors = Partial<Record<keyof ContactFormState, string>>;
+type SubmissionStatus = "idle" | "submitting" | "success" | "error";
 
 const initialFormState: ContactFormState = {
   name: "",
   email: "",
   company: "",
-  need: "",
-  budget: "",
-  timeline: "",
+  website: "",
+  helpWith: "",
   message: "",
 };
+
+const callAgenda = [
+  {
+    title: "Review your lead flow",
+    description: "See how new roofing leads are currently handled.",
+    icon: Workflow,
+  },
+  {
+    title: "Find the biggest conversion gap",
+    description: "Identify where leads are being lost.",
+    icon: SearchCheck,
+  },
+  {
+    title: "Get a next-step plan",
+    description: "Leave with practical recommendations.",
+    icon: MapIcon,
+  },
+] as const;
 
 export function ContactPage() {
   useContactMetadata();
@@ -43,12 +67,12 @@ export function ContactPage() {
           <p className="hero-subheadline">{siteContent.contact.subheadline}</p>
           <div className="hero-actions">
             <a
-              aria-label={siteContent.ctas.primary.label}
+              aria-label={siteContent.contact.form.submitLabel}
               className="btn btn--primary"
-              data-cta="book-free-consultation"
-              href="#contact-form"
+              data-cta="book-free-roofing-growth-call"
+              href={siteContent.ctas.primary.href}
             >
-              {siteContent.ctas.primary.label}
+              {siteContent.contact.form.submitLabel}
               <ArrowRight size={18} aria-hidden="true" />
             </a>
             <a
@@ -63,39 +87,55 @@ export function ContactPage() {
         </div>
       </section>
 
-      <ContactSection showIntro={false} />
+      <ContactSection />
     </main>
   );
 }
 
-export function ContactSection({ showIntro = true }: { showIntro?: boolean }) {
+export function ContactSection() {
   return (
     <section className="section contact-section" id="contact">
       <div className="container contact-layout">
-        <div className="contact-copy">
-          {showIntro ? (
-            <header className="section-header">
-              <p className="eyebrow">{siteContent.contact.eyebrow}</p>
-              <h2>{siteContent.contact.headline}</h2>
-              <p>{siteContent.contact.subheadline}</p>
-            </header>
-          ) : null}
+        <div className="contact-strategy">
+          <header className="contact-strategy__header">
+            <p className="simple-eyebrow">Free Roofing Strategy Call</p>
+            <h2>Book a free roofing strategy call.</h2>
+            <p>
+              Get a focused review of how your roofing company responds to new
+              leads, follows up, and turns qualified opportunities into booked
+              inspections.
+            </p>
+            <a
+              className="btn btn--primary contact-strategy__cta"
+              data-cta="book-free-roofing-growth-call"
+              href={siteContent.ctas.primary.href}
+            >
+              Book a Free Roofing Strategy Call
+              <ArrowRight aria-hidden="true" size={18} />
+            </a>
+          </header>
 
-          <div className="trust-callout contact-reassurance">
-            {siteContent.contact.reassurance}
+          <div
+            aria-labelledby="call-agenda-title"
+            className="contact-call-agenda"
+          >
+            <h3 className="simple-eyebrow" id="call-agenda-title">
+              What happens on this call?
+            </h3>
+            <div className="contact-call-agenda__list">
+              {callAgenda.map(({ description, icon: Icon, title }) => (
+                <article className="contact-call-card" key={title}>
+                  <span className="contact-call-card__icon" aria-hidden="true">
+                    <Icon size={19} strokeWidth={1.8} />
+                  </span>
+                  <div>
+                    <h4>{title}</h4>
+                    <p>{description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
-
-          <div className="next-step-list" aria-label="What happens next">
-            <p className="eyebrow">What Happens Next</p>
-            {siteContent.contact.nextSteps.map((step, index) => (
-              <div className="next-step" key={step}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{step}</strong>
-              </div>
-            ))}
-          </div>
-
-          <AlternateContactLinks />
         </div>
 
         <ContactForm />
@@ -107,50 +147,120 @@ export function ContactSection({ showIntro = true }: { showIntro?: boolean }) {
 function ContactForm() {
   const [form, setForm] = useState<ContactFormState>(initialFormState);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [hasPreparedEmail, setHasPreparedEmail] = useState(false);
-
-  const mailtoHref = useMemo(() => createMailtoHref(form), [form]);
+  const [submissionStatus, setSubmissionStatus] =
+    useState<SubmissionStatus>("idle");
+  const [submissionMessage, setSubmissionMessage] = useState("");
 
   function updateField(name: keyof ContactFormState, value: string) {
     setForm((current) => ({ ...current, [name]: value }));
     setErrors((current) => ({ ...current, [name]: undefined }));
-    setHasPreparedEmail(false);
+    if (submissionStatus !== "submitting") {
+      setSubmissionStatus("idle");
+      setSubmissionMessage("");
+    }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
 
     const nextErrors = validateContactForm(form);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
-      setHasPreparedEmail(false);
+      setSubmissionStatus("error");
+      setSubmissionMessage(
+        "Please review the highlighted fields and try again.",
+      );
+      requestAnimationFrame(() => {
+        formElement
+          .querySelector<HTMLElement>('[aria-invalid="true"]')
+          ?.focus();
+      });
       return;
     }
 
-    // TODO: Replace this frontend-only flow with a secure API route or email
-    // provider integration. Keep secrets in environment variables only.
-    setHasPreparedEmail(true);
+    const formData = new FormData(formElement);
+    setSubmissionStatus("submitting");
+    setSubmissionMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        body: JSON.stringify({
+          ...form,
+          companyFax: String(formData.get("companyFax") ?? ""),
+        }),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+      });
+
+      const payload = (await response.json().catch(() => null)) as {
+        message?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(
+          payload?.message ??
+            "Your message could not be sent. Please try again shortly.",
+        );
+      }
+
+      setForm(initialFormState);
+      setErrors({});
+      setSubmissionStatus("success");
+      setSubmissionMessage(
+        "Thanks — your message has been sent. I’ll reply as soon as possible.",
+      );
+    } catch (error) {
+      setSubmissionStatus("error");
+      setSubmissionMessage(
+        error instanceof Error
+          ? error.message
+          : "Your message could not be sent. Please try again shortly.",
+      );
+    }
   }
 
   return (
     <form
+      aria-busy={submissionStatus === "submitting"}
       aria-describedby="contact-form-note"
       className="contact-form premium-card"
       id="contact-form"
       noValidate
       onSubmit={handleSubmit}
     >
+      <header className="contact-form__header">
+        <h3>Send a message</h3>
+        <p>
+          Prefer email? Share a few details and I’ll reply at the address you
+          provide.
+        </p>
+      </header>
+
+      <div aria-hidden="true" className="form-honeypot">
+        <label htmlFor="companyFax">Company fax</label>
+        <input
+          autoComplete="off"
+          id="companyFax"
+          name="companyFax"
+          tabIndex={-1}
+          type="text"
+        />
+      </div>
+
       <div className="form-grid form-grid--two">
-        <FormField error={errors.name} id="name" label="Name">
+        <FormField error={errors.name} id="name" label="Full Name">
           <input
             aria-describedby={errors.name ? "name-error" : undefined}
             aria-invalid={Boolean(errors.name)}
             autoComplete="name"
             id="name"
+            maxLength={100}
             name="name"
             onChange={(event) => updateField("name", event.target.value)}
-            placeholder="Your name"
+            placeholder="Your full name"
+            required
             type="text"
             value={form.name}
           />
@@ -162,84 +272,73 @@ function ContactForm() {
             aria-invalid={Boolean(errors.email)}
             autoComplete="email"
             id="email"
+            maxLength={254}
             name="email"
             onChange={(event) => updateField("email", event.target.value)}
             placeholder="you@company.com"
+            required
             type="email"
             value={form.email}
           />
         </FormField>
       </div>
 
-      <FormField
-        error={errors.company}
-        id="company"
-        label="Company / Website URL"
-      >
-        <input
-          aria-describedby={errors.company ? "company-error" : undefined}
-          aria-invalid={Boolean(errors.company)}
-          autoComplete="organization"
-          id="company"
-          name="company"
-          onChange={(event) => updateField("company", event.target.value)}
-          placeholder="Company name or website URL"
-          type="text"
-          value={form.company}
-        />
-      </FormField>
-
       <div className="form-grid form-grid--two">
-        <FormField error={errors.need} id="need" label="What do you need?">
-          <select
-            aria-describedby={errors.need ? "need-error" : undefined}
-            aria-invalid={Boolean(errors.need)}
-            id="need"
-            name="need"
-            onChange={(event) => updateField("need", event.target.value)}
-            value={form.need}
-          >
-            <option value="">Select one</option>
-            {siteContent.contact.form.needs.map((need) => (
-              <option key={need} value={need}>
-                {need}
-              </option>
-            ))}
-          </select>
+        <FormField error={errors.company} id="company" label="Company Name">
+          <input
+            aria-describedby={errors.company ? "company-error" : undefined}
+            aria-invalid={Boolean(errors.company)}
+            autoComplete="organization"
+            id="company"
+            maxLength={150}
+            name="company"
+            onChange={(event) => updateField("company", event.target.value)}
+            placeholder="Your roofing company"
+            required
+            type="text"
+            value={form.company}
+          />
         </FormField>
 
-        <FormField error={errors.budget} id="budget" label="Budget range">
-          <select
-            aria-describedby={errors.budget ? "budget-error" : undefined}
-            aria-invalid={Boolean(errors.budget)}
-            id="budget"
-            name="budget"
-            onChange={(event) => updateField("budget", event.target.value)}
-            value={form.budget}
-          >
-            <option value="">Select one</option>
-            {siteContent.contact.form.budgets.map((budget) => (
-              <option key={budget} value={budget}>
-                {budget}
-              </option>
-            ))}
-          </select>
+        <FormField
+          error={errors.website}
+          id="website"
+          label="Website (optional)"
+        >
+          <input
+            aria-describedby={errors.website ? "website-error" : undefined}
+            aria-invalid={Boolean(errors.website)}
+            autoComplete="url"
+            id="website"
+            inputMode="url"
+            maxLength={300}
+            name="website"
+            onChange={(event) => updateField("website", event.target.value)}
+            placeholder="https://yourcompany.com"
+            type="url"
+            value={form.website}
+          />
         </FormField>
       </div>
 
-      <FormField error={errors.timeline} id="timeline" label="Timeline">
+      <FormField
+        error={errors.helpWith}
+        id="helpWith"
+        label="What do you need help with?"
+      >
         <select
-          aria-describedby={errors.timeline ? "timeline-error" : undefined}
-          aria-invalid={Boolean(errors.timeline)}
-          id="timeline"
-          name="timeline"
-          onChange={(event) => updateField("timeline", event.target.value)}
-          value={form.timeline}
+          aria-describedby={errors.helpWith ? "helpWith-error" : undefined}
+          aria-invalid={Boolean(errors.helpWith)}
+          id="helpWith"
+          name="helpWith"
+          onChange={(event) => updateField("helpWith", event.target.value)}
+          required
+          value={form.helpWith}
         >
           <option value="">Select one</option>
-          {siteContent.contact.form.timelines.map((timeline) => (
-            <option key={timeline} value={timeline}>
-              {timeline}
+          {siteContent.contact.form.leadProblems.map((problem) => (
+            <option key={problem} value={problem}>
+              {problem}
             </option>
           ))}
         </select>
@@ -250,47 +349,62 @@ function ContactForm() {
           aria-describedby={errors.message ? "message-error" : undefined}
           aria-invalid={Boolean(errors.message)}
           id="message"
+          maxLength={3000}
           name="message"
           onChange={(event) => updateField("message", event.target.value)}
-          placeholder="Tell me what you want to build, improve, or automate."
-          rows={6}
+          placeholder="Tell me about your current lead process and where you need help."
+          required
+          rows={5}
           value={form.message}
         />
       </FormField>
 
       <button
-        aria-label={siteContent.ctas.primary.label}
+        aria-label="Send Message"
         className="btn btn--primary contact-submit"
-        data-cta="book-free-consultation"
+        data-cta="send-message"
+        disabled={submissionStatus === "submitting"}
         type="submit"
       >
-        {siteContent.ctas.primary.label}
-        <ArrowRight size={18} aria-hidden="true" />
+        {submissionStatus === "submitting" ? (
+          <>
+            Sending
+            <LoaderCircle
+              aria-hidden="true"
+              className="contact-submit__spinner"
+              size={18}
+            />
+          </>
+        ) : (
+          <>
+            Send Message
+            <ArrowRight size={18} aria-hidden="true" />
+          </>
+        )}
       </button>
 
-      {hasPreparedEmail ? (
-        <output className="form-success" id="contact-form-note">
-          <Check size={18} aria-hidden="true" />
-          <div>
-            <strong>Your consultation request is ready.</strong>
-            <p>
-              This form is frontend-only for now. Open the email draft below to
-              send the details directly.
-            </p>
-            <a
-              className="text-link"
-              data-cta="send-consultation-email"
-              href={mailtoHref}
-            >
-              Open email draft
-              <ArrowRight size={16} aria-hidden="true" />
-            </a>
-          </div>
+      {submissionStatus === "success" ? (
+        <output
+          aria-live="polite"
+          className="form-status form-status--success"
+          id="contact-form-note"
+        >
+          <CheckCircle2 size={19} aria-hidden="true" />
+          <span>{submissionMessage}</span>
         </output>
+      ) : submissionStatus === "error" ? (
+        <div
+          aria-live="assertive"
+          className="form-status form-status--error"
+          id="contact-form-note"
+          role="alert"
+        >
+          <CircleAlert size={19} aria-hidden="true" />
+          <span>{submissionMessage}</span>
+        </div>
       ) : (
         <p className="form-note" id="contact-form-note">
-          No secrets are stored here. Form delivery can be connected later using
-          a secure API route or email service environment variables.
+          Your details are sent securely to hello@basitaminbhatti.me.
         </p>
       )}
     </form>
@@ -323,56 +437,6 @@ function FormField({
   );
 }
 
-function AlternateContactLinks() {
-  const contactLinks = [
-    {
-      label: "Email",
-      href: `mailto:${personalInfo.email}`,
-      icon: Mail,
-      external: false,
-      detail: personalInfo.email,
-    },
-    {
-      label: "LinkedIn",
-      href: personalInfo.linkedin,
-      icon: Linkedin,
-      external: true,
-      detail: "View profile",
-    },
-    {
-      label: "Chat on WhatsApp",
-      href: personalInfo.whatsapp,
-      icon: FaWhatsapp,
-      external: true,
-      detail: "+923214337294",
-    },
-  ];
-
-  return (
-    <div className="alternate-contact">
-      <p className="eyebrow">Alternate Contact</p>
-      <div className="alternate-contact__links">
-        {contactLinks.map(({ detail, external, href, icon: Icon, label }) => (
-          <a
-            className="proof-card"
-            data-cta={`alternate-${label.toLowerCase()}`}
-            href={href}
-            key={label}
-            rel={external ? "noopener noreferrer" : undefined}
-            target={external ? "_blank" : undefined}
-          >
-            <Icon size={20} aria-hidden="true" />
-            <span>
-              <strong>{label}</strong>
-              <small>{detail}</small>
-            </span>
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function validateContactForm(form: ContactFormState) {
   const errors: FormErrors = {};
 
@@ -386,44 +450,30 @@ function validateContactForm(form: ContactFormState) {
     errors.email = "Please add a valid email.";
   }
 
-  if (!form.need) {
-    errors.need = "Please choose what you need.";
+  if (!form.company.trim()) {
+    errors.company = "Please add your company name.";
   }
 
-  if (!form.budget) {
-    errors.budget = "Please choose a budget range.";
+  if (form.website.trim()) {
+    try {
+      const website = new URL(form.website);
+      if (!["http:", "https:"].includes(website.protocol)) {
+        errors.website = "Please add a valid website URL.";
+      }
+    } catch {
+      errors.website = "Please add a full URL, including https://.";
+    }
   }
 
-  if (!form.timeline) {
-    errors.timeline = "Please choose a timeline.";
+  if (!form.helpWith) {
+    errors.helpWith = "Please choose what you need help with.";
   }
 
   if (!form.message.trim()) {
-    errors.message = "Please share a short message.";
+    errors.message = "Please add a short message.";
   }
 
   return errors;
-}
-
-function createMailtoHref(form: ContactFormState) {
-  const subject = encodeURIComponent(
-    "Free Website & Automation Consultation Request",
-  );
-  const body = encodeURIComponent(
-    [
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
-      `Company / Website URL: ${form.company || "Not provided"}`,
-      `Need: ${form.need}`,
-      `Budget: ${form.budget}`,
-      `Timeline: ${form.timeline}`,
-      "",
-      "Message:",
-      form.message,
-    ].join("\n"),
-  );
-
-  return `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
 }
 
 function useContactMetadata() {

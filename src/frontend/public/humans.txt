@@ -1,12 +1,12 @@
 /* PERSON */
 Name: Basit Amin Bhatti
-Role: AI Website & Automation Builder
+Role: AI Growth Partner for Roofing Companies; Founder of BAVEXA
 Location: Punjab, Pakistan
-Contact: abbhatti504@gmail.com
+Contact: hello@basitaminbhatti.me
 Website: https://www.basitaminbhatti.me/
 LinkedIn: https://www.linkedin.com/in/basit-amin-bhatti/
 
 /* SITE */
 Language: English
-Focus: AI-powered websites, web apps, Shopify CRO, AI agents, and n8n automation
+Focus: AI lead response, qualification, follow-up, roofing CRM automation, and inspection booking
 Standards: Semantic HTML, accessibility, responsive design, and structured data

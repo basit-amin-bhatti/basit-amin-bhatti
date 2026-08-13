@@ -1,32 +1,32 @@
 export const siteContent = {
   seo: {
     siteUrl: "https://www.basitaminbhatti.me",
-    title: "Basit Amin Bhatti | AI Automation & Web App Developer",
-    homepageTitle: "Basit Amin Bhatti | AI Automation & Web App Developer",
+    title: "Basit Amin Bhatti | AI Growth Partner for Roofing Companies",
+    homepageTitle:
+      "Basit Amin Bhatti | AI Growth Partner for Roofing Companies",
     description:
-      "Basit Amin Bhatti is a Pakistan-based AI automation consultant and full-stack developer for AI websites, web apps, Shopify, AI agents, and n8n workflows.",
+      "Basit Amin Bhatti helps U.S. roofing companies respond faster, automate lead follow-up, qualify inquiries, and book more roof inspections with BAVEXA.",
     homepageDescription:
-      "Basit Amin Bhatti is a Pakistan-based AI automation consultant and full-stack developer for AI websites, web apps, Shopify, AI agents, and n8n workflows.",
+      "Basit Amin Bhatti helps U.S. roofing companies respond faster, automate lead follow-up, qualify inquiries, and book more roof inspections with BAVEXA.",
     ogImage: "/og-image.png",
-    ogTitle: "Basit Amin Bhatti | AI Automation & Web App Developer",
+    ogTitle: "Basit Amin Bhatti | AI Growth Partner for Roofing Companies",
     ogDescription:
-      "Official website of Basit Amin Bhatti, a Pakistan-based builder of AI-powered websites, web apps, Shopify experiences, AI agents, and n8n automations.",
-    ogImageAlt:
-      "Basit Amin Bhatti, AI Website and Automation Builder for businesses",
+      "Official website of Basit Amin Bhatti, founder of BAVEXA and AI Growth Partner helping U.S. roofing companies convert more leads into booked inspections.",
+    ogImageAlt: "Basit Amin Bhatti, AI Growth Partner for Roofing Companies",
   },
   brand: {
     name: "Basit Amin Bhatti",
-    primaryTitle: "AI Website & Automation Builder",
+    primaryTitle: "AI Growth Partner for Roofing Companies",
     positioning:
-      "Pakistan-based full-stack developer and automation consultant for AI-powered websites, web apps, ecommerce, AI agents, and business workflows.",
+      "Pakistan-based AI growth partner helping U.S. roofing companies improve lead response, qualification, follow-up, CRM automation, and inspection booking.",
     promise:
-      "AI-assisted speed. Human-reviewed quality. Business-focused execution.",
+      "Helping roofing companies respond faster, follow up consistently, and turn more leads into booked inspections with AI-powered systems.",
   },
   hero: {
-    eyebrow: "Basit Amin Bhatti · AI Website & Automation Builder",
-    headline: "AI-Powered Websites, Web Apps & Automations for Businesses",
+    eyebrow: "AI Growth Partner for Roofing Companies",
+    headline: "Turn More Roofing Leads Into Booked Inspections",
     subheadline:
-      "I’m Basit Amin Bhatti, a Pakistan-based full-stack developer and automation consultant. I help agencies, ecommerce brands, founders, and service businesses launch conversion-focused websites, Shopify experiences, AI agents, and n8n workflow automations with AI-assisted speed and human-reviewed quality.",
+      "I help roofing companies respond to leads faster, automate follow-up, and turn more inquiries into booked inspections using AI-powered growth systems.",
     proofBullets: [
       "Conversion websites, landing pages & SaaS dashboards",
       "Shopify CRO pages built around buyer trust",
@@ -34,24 +34,24 @@ export const siteContent = {
       "Clear positioning and delivery",
     ],
     trustMicrocopy:
-      "AI-assisted speed. Human-reviewed quality. Business-focused execution.",
+      "Built for roofing teams that want faster response times and a clearer path from lead to inspection.",
     primaryCta: {
-      label: "Book a Free Consultation",
-      href: "/#contact",
+      label: "BOOK A FREE ROOFING STRATEGY CALL",
+      href: "https://cal.com/basitaminbhatti/roofing-growth-call",
     },
     secondaryCta: {
-      label: "View Services",
-      href: "/#services",
+      label: "SEE THE BAVEXA SYSTEM →",
+      href: "/#process",
     },
   },
   ctas: {
     primary: {
-      label: "Book a Free Consultation",
-      href: "/#contact",
+      label: "BOOK A FREE ROOFING STRATEGY CALL",
+      href: "https://cal.com/basitaminbhatti/roofing-growth-call",
     },
     short: {
-      label: "Book Free Consultation",
-      href: "/#contact",
+      label: "BOOK A FREE ROOFING STRATEGY CALL",
+      href: "https://cal.com/basitaminbhatti/roofing-growth-call",
     },
     secondary: {
       label: "View Work",
@@ -224,27 +224,27 @@ export const siteContent = {
   process: [
     {
       step: "01",
-      title: "Consultation",
+      title: "Growth Call",
       description:
-        "Review your website, offer, funnel, workflow, SaaS idea, or AI solution and identify the fastest useful improvement path.",
+        "Review the roofing company’s current lead flow, response times, follow-up, and booking process.",
     },
     {
       step: "02",
-      title: "Plan",
+      title: "System Plan",
       description:
-        "Define the message, scope, user flow, priorities, and the shortest practical path to launch.",
+        "Identify conversion gaps and map the right AI automation workflow.",
     },
     {
       step: "03",
-      title: "Build",
+      title: "Build & Integrate",
       description:
-        "Use AI-assisted development to move quickly while keeping the work structured, readable, and tied to the business outcome.",
+        "Implement lead response, qualification, follow-up, CRM, and booking automation.",
     },
     {
       step: "04",
-      title: "Launch & Improve",
+      title: "Launch & Optimize",
       description:
-        "Review the work, prepare launch, and use real feedback to guide the next useful improvement.",
+        "Test the system, launch it, monitor performance, and improve based on real lead data.",
     },
   ],
   techStack: [
@@ -398,37 +398,38 @@ export const siteContent = {
       "Have a website, SaaS idea, Shopify page, or workflow that needs a sharper path?",
     subheadline:
       "Send the link or idea. I will review the opportunity and suggest a practical build, CRO, or automation path.",
-    cta: "Book a Free Consultation",
+    cta: "BOOK A FREE ROOFING STRATEGY CALL",
   },
   contact: {
-    eyebrow: "Free Website & Automation Consultation",
-    headline: "Have a website, SaaS, AI solution, or automation idea?",
+    eyebrow: "Free Roofing Growth Call",
+    headline: "Want to Turn More Roofing Leads Into Booked Inspections?",
     subheadline:
-      "Send me your idea or existing website and I'll suggest the fastest path to build, improve, or automate it.",
+      "Tell me how your roofing company currently handles new leads, follow-up, and inspection booking. I’ll identify where leads may be slipping through and what can be automated.",
     reassurance:
-      "Clear scope, fast communication, clean implementation, and no fake promises.",
+      "A focused, no-pressure growth call for U.S. roofing companies.",
     form: {
-      needs: [
-        "AI Website Development",
-        "Vibe-Coded SaaS / AI Solution",
-        "Shopify / Ecommerce CRO",
-        "AI Automation / n8n Workflow",
-        "Not sure yet",
+      monthlyLeadVolumes: [
+        "Under 25 leads",
+        "25-50 leads",
+        "51-100 leads",
+        "101-250 leads",
+        "More than 250 leads",
       ],
-      budgets: [
-        "Under $1,000",
-        "$1,000-$3,000",
-        "$3,000-$7,500",
-        "$7,500+",
-        "Not sure",
+      leadProblems: [
+        "Slow Lead Response",
+        "Missed Calls",
+        "Lead Qualification",
+        "Follow-Up",
+        "Inspection Booking",
+        "CRM Automation",
       ],
-      timelines: ["ASAP", "2-4 weeks", "1-2 months", "Flexible"],
+      submitLabel: "BOOK A FREE ROOFING STRATEGY CALL",
     },
     nextSteps: [
-      "I review your website, idea, or workflow",
-      "I identify quick wins and the best build path",
-      "We agree on scope, timeline, and deliverables",
-      "I build, review, launch, and improve",
+      "I review your current roofing lead flow",
+      "I identify conversion leaks and missed opportunities",
+      "I recommend the right AI automation system",
+      "We discuss implementation and next steps",
     ],
   },
   footerLinks: [
@@ -602,7 +603,7 @@ export const servicePages = [
       "AI-powered website development for service businesses, agencies, consultants, and startups that need conversion-focused websites and landing pages built faster.",
     positioning:
       "Modern, conversion-focused websites and landing pages for businesses that need clearer positioning, stronger CTAs, and faster launch cycles.",
-    primaryCta: "Book a Free Consultation",
+    primaryCta: "BOOK A FREE ROOFING STRATEGY CALL",
     sections: [
       {
         eyebrow: "Who It Is For",
@@ -693,7 +694,7 @@ export const servicePages = [
       "Vibe-coded SaaS dashboards, AI tools, portals, and business web apps built with AI-assisted web development, then reviewed and structured for real users.",
     positioning:
       "AI-assisted development speeds up prototyping, but the final SaaS or AI solution is reviewed, structured, tested, and prepared for real users.",
-    primaryCta: "Book a Free Consultation",
+    primaryCta: "BOOK A FREE ROOFING STRATEGY CALL",
     sections: [
       {
         eyebrow: "What I Can Build",
@@ -790,7 +791,7 @@ export const servicePages = [
       "Shopify CRO developer for ecommerce brands that need clearer product pages, ecommerce landing pages, better UX, trust signals, and conversion-focused layouts.",
     positioning:
       "Conversion-focused Shopify pages and ecommerce improvements for brands that need clearer offers, better UX, and stronger product or landing pages.",
-    primaryCta: "Book a Free Consultation",
+    primaryCta: "BOOK A FREE ROOFING STRATEGY CALL",
     sections: [
       {
         eyebrow: "Problems Solved",
@@ -869,7 +870,7 @@ export const servicePages = [
       "AI automation consultant for businesses using n8n automation, APIs, AI workflow steps, alerts, lead routing, reporting, and follow-up systems.",
     positioning:
       "Automate repetitive business workflows so leads, orders, reports, alerts, and follow-ups move without constant manual work.",
-    primaryCta: "Book a Free Consultation",
+    primaryCta: "BOOK A FREE ROOFING STRATEGY CALL",
     sections: [
       {
         eyebrow: "Workflow Examples",

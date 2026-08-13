@@ -90,7 +90,7 @@ export function WhyAISection() {
           <p className="trust-callout">{siteContent.aiDevelopment.trustLine}</p>
           <a
             className="btn btn--secondary"
-            data-cta="book-free-consultation"
+            data-cta="book-free-roofing-growth-call"
             href={siteContent.ctas.primary.href}
           >
             {siteContent.ctas.primary.label}
@@ -307,7 +307,7 @@ export function FinalCTASection() {
         <div className="hero-actions">
           <a
             className="btn btn--primary"
-            data-cta="book-free-consultation"
+            data-cta="book-free-roofing-growth-call"
             href={siteContent.ctas.primary.href}
           >
             {siteContent.finalCta.cta}

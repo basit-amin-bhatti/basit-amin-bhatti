@@ -238,7 +238,7 @@ export function personSchema() {
     image: {
       "@type": "ImageObject",
       url: absoluteUrl("/assets/images/basit-amin-bhatti-ai-automation.webp"),
-      caption: "Basit Amin Bhatti, AI Website and Automation Builder",
+      caption: "Basit Amin Bhatti, AI Growth Partner for Roofing Companies",
     },
     email: `mailto:${personalInfo.email}`,
     nationality: {
@@ -256,12 +256,16 @@ export function personSchema() {
     },
     hasOccupation: {
       "@type": "Occupation",
-      name: "AI Website & Automation Builder",
+      name: siteContent.brand.primaryTitle,
       occupationLocation: {
         "@type": "Country",
         name: "Pakistan",
       },
       skills: [
+        "Roofing lead conversion",
+        "AI lead response and qualification",
+        "Automated lead follow-up",
+        "Inspection booking automation",
         "AI automation",
         "n8n workflow automation",
         "AI agent development",
@@ -270,6 +274,12 @@ export function personSchema() {
       ],
     },
     knowsAbout: [
+      "Roofing lead conversion",
+      "Roofing CRM automation",
+      "Lead response automation",
+      "Lead qualification",
+      "Inspection booking",
+      "BAVEXA",
       "AI-powered websites",
       "AI agents",
       "AI automation",
@@ -300,7 +310,7 @@ export function organizationSchema() {
     url: absoluteUrl("/"),
     logo: {
       "@type": "ImageObject",
-      url: absoluteUrl("/favicon-logo.png"),
+      url: absoluteUrl("/favicon-logo.png?v=20260813b"),
     },
     founder: { "@id": absoluteUrl("/#person") },
     contactPoint: {
@@ -349,11 +359,16 @@ export function professionalServiceSchema() {
     "@id": absoluteUrl("/#professional-service"),
     name: `${siteContent.brand.name} - ${siteContent.brand.primaryTitle}`,
     description:
-      "AI-powered website development, full-stack web apps, Shopify CRO, AI agents, and n8n automation workflows for businesses.",
+      "AI-powered lead response, qualification, follow-up, CRM, and inspection-booking systems for U.S. roofing companies.",
     url: absoluteUrl("/"),
     email: personalInfo.email,
-    areaServed: "Worldwide",
+    areaServed: "United States",
     serviceType: [
+      "AI lead response",
+      "AI lead qualification",
+      "Automated lead follow-up",
+      "Roof inspection booking automation",
+      "Roofing CRM automation",
       "AI website development",
       "Full-stack web app development",
       "AI agent development",

@@ -28,7 +28,7 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
             <a
               aria-label={page.primaryCta}
               className="btn btn--primary"
-              data-cta="book-free-consultation"
+              data-cta="book-free-roofing-growth-call"
               href={siteContent.ctas.primary.href}
             >
               {page.primaryCta}
@@ -131,7 +131,7 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
             <a
               aria-label={siteContent.ctas.primary.label}
               className="btn btn--primary"
-              data-cta="book-free-consultation"
+              data-cta="book-free-roofing-growth-call"
               href={siteContent.ctas.primary.href}
             >
               {siteContent.ctas.primary.label}

@@ -57,7 +57,7 @@ export function CaseStudiesPage() {
             <a
               aria-label={siteContent.ctas.primary.label}
               className="btn btn--primary"
-              data-cta="book-free-consultation"
+              data-cta="book-free-roofing-growth-call"
               href={siteContent.ctas.primary.href}
             >
               {siteContent.ctas.primary.label}
@@ -118,7 +118,7 @@ export function CaseStudyDetailPage({ caseStudy }: { caseStudy: CaseStudy }) {
             <a
               aria-label={siteContent.ctas.primary.label}
               className="btn btn--primary"
-              data-cta="book-free-consultation"
+              data-cta="book-free-roofing-growth-call"
               href={siteContent.ctas.primary.href}
             >
               {siteContent.ctas.primary.label}
@@ -240,7 +240,7 @@ function CaseStudyCTA() {
           <a
             aria-label={siteContent.ctas.primary.label}
             className="btn btn--primary"
-            data-cta="book-free-consultation"
+            data-cta="book-free-roofing-growth-call"
             href={siteContent.ctas.primary.href}
           >
             {siteContent.ctas.primary.label}

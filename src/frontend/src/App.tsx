@@ -1,3 +1,4 @@
+import BavexaDemoSection from "@/components/BavexaDemoSection";
 import { BrandMarquee } from "@/components/BrandMarquee";
 import { CaseStudiesPage, CaseStudyDetailPage } from "@/components/CaseStudies";
 import { ContactPage, ContactSection } from "@/components/ContactSystem";
@@ -8,8 +9,6 @@ import Navbar from "@/components/Navbar";
 import {
   HomeProcessSection,
   HomeServicesSection,
-  HomeTechStackSection,
-  HomeWorkSection,
 } from "@/components/OnePageSections";
 import { PortfolioSection } from "@/components/PortfolioSection";
 import { usePageSeo } from "@/components/Seo";
@@ -88,10 +87,9 @@ function HomePage() {
         <Hero />
         <BrandMarquee />
         <HomeServicesSection />
+        <BavexaDemoSection />
         <PortfolioSection />
-        <HomeWorkSection />
         <HomeProcessSection />
-        <HomeTechStackSection />
         <ContactSection />
       </main>
       <Footer />
