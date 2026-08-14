@@ -88,8 +88,8 @@ function HomePage() {
         <BrandMarquee />
         <HomeServicesSection />
         <BavexaDemoSection />
-        <PortfolioSection />
         <HomeProcessSection />
+        <PortfolioSection />
         <ContactSection />
       </main>
       <Footer />
