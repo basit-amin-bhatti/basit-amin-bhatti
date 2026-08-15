@@ -11,6 +11,7 @@ import {
   Sparkles,
   UserCheck,
 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const roofingServices = [
   {
@@ -213,8 +214,90 @@ function RoofingServiceVisual({
 }
 
 export function HomeProcessSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let intervalId: number | undefined;
+    let isInView = false;
+    let stepIndex = 0;
+
+    const stopSequence = () => {
+      if (intervalId !== undefined) {
+        window.clearInterval(intervalId);
+        intervalId = undefined;
+      }
+
+      setActiveStep(null);
+    };
+
+    const startSequence = () => {
+      stopSequence();
+
+      if (reducedMotion.matches) {
+        return;
+      }
+
+      stepIndex = 0;
+      setActiveStep(stepIndex);
+      intervalId = window.setInterval(() => {
+        stepIndex = (stepIndex + 1) % siteContent.process.length;
+        setActiveStep(stepIndex);
+      }, 2400);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const nextIsInView = entry.isIntersecting;
+
+        if (nextIsInView === isInView) {
+          return;
+        }
+
+        isInView = nextIsInView;
+
+        if (isInView) {
+          startSequence();
+        } else {
+          stopSequence();
+        }
+      },
+      {
+        rootMargin: "0px 0px -15% 0px",
+        threshold: 0.1,
+      },
+    );
+
+    const handleMotionPreference = () => {
+      if (isInView && !reducedMotion.matches) {
+        startSequence();
+      } else {
+        stopSequence();
+      }
+    };
+
+    observer.observe(section);
+    reducedMotion.addEventListener("change", handleMotionPreference);
+
+    return () => {
+      observer.disconnect();
+      reducedMotion.removeEventListener("change", handleMotionPreference);
+
+      if (intervalId !== undefined) {
+        window.clearInterval(intervalId);
+      }
+    };
+  }, []);
+
   return (
-    <section className="home-section" id="process">
+    <section className="home-section" id="process" ref={sectionRef}>
       <div className="container">
         <SectionIntro
           eyebrow="Process"
@@ -223,8 +306,11 @@ export function HomeProcessSection() {
         />
 
         <ol className="simple-process">
-          {siteContent.process.map((item) => (
-            <li key={item.step}>
+          {siteContent.process.map((item, index) => (
+            <li
+              className={activeStep === index ? "is-active" : ""}
+              key={item.step}
+            >
               <span>{item.step}</span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>

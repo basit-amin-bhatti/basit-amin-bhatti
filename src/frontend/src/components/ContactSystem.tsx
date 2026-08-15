@@ -1,4 +1,5 @@
 import { siteContent } from "@/data/siteContent";
+import { submitWithWeb3Forms } from "@/lib/web3forms";
 import {
   ArrowRight,
   CheckCircle2,
@@ -185,32 +186,15 @@ function ContactForm() {
     setSubmissionMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
-        body: JSON.stringify({
-          ...form,
-          companyFax: String(formData.get("companyFax") ?? ""),
-        }),
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
+      await submitWithWeb3Forms({
+        ...form,
+        companyFax: String(formData.get("companyFax") ?? ""),
       });
-
-      const payload = (await response.json().catch(() => null)) as {
-        message?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(
-          payload?.message ??
-            "Your message could not be sent. Please try again shortly.",
-        );
-      }
 
       setForm(initialFormState);
       setErrors({});
       setSubmissionStatus("success");
-      setSubmissionMessage(
-        "Thanks — your message has been sent. I’ll reply as soon as possible.",
-      );
+      setSubmissionMessage("Message sent");
     } catch (error) {
       setSubmissionStatus("error");
       setSubmissionMessage(

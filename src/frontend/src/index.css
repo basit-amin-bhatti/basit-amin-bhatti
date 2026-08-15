@@ -3224,9 +3224,32 @@ body.mobile-menu-open {
 }
 
 .simple-process li {
+  position: relative;
   min-width: 0;
   border-top: 1px solid var(--border-strong);
   padding: 1.35rem 0.35rem 0 0;
+  transition: border-top-color 0.6s ease, box-shadow 0.6s ease, transform 0.6s
+    ease;
+}
+
+.simple-process li::before {
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(124, 255, 107, 0.88),
+    transparent
+  );
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: opacity 0.45s ease, transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .simple-process li > span {
@@ -3235,6 +3258,7 @@ body.mobile-menu-open {
   color: var(--primary);
   font-family: var(--font-mono);
   font-size: 0.72rem;
+  transition: text-shadow 0.6s ease, transform 0.6s ease;
 }
 
 .simple-process h3 {
@@ -3246,6 +3270,40 @@ body.mobile-menu-open {
   margin: 0;
   font-size: 0.92rem;
   line-height: 1.65;
+}
+
+.simple-process li.is-active {
+  border-top-color: rgba(124, 255, 107, 0.92);
+  box-shadow: 0 -14px 34px rgba(124, 255, 107, 0.14);
+  transform: translateY(-4px);
+}
+
+.simple-process li.is-active::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.simple-process li.is-active > span {
+  text-shadow: 0 0 8px rgba(124, 255, 107, 0.85), 0 0 18px
+    rgba(124, 255, 107, 0.5);
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simple-process li,
+  .simple-process li::before,
+  .simple-process li > span {
+    transition: none !important;
+  }
+
+  .simple-process li.is-active,
+  .simple-process li.is-active > span {
+    transform: none;
+  }
+
+  .simple-process li.is-active::before {
+    opacity: 0;
+  }
 }
 
 .contact-section {
