@@ -1,9 +1,7 @@
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 type PortfolioItem = {
   category: string;
-  external?: boolean;
-  href: string;
   imageHeight?: number;
   imageWidth?: number;
   name: string;
@@ -17,7 +15,6 @@ const portfolioItems: PortfolioItem[] = [
     category: "AI Automation · Internal Product",
     whatIDid: "Lead conversion system design",
     src: "/service-images/ai-automation-n8n-workflows.webp",
-    href: "/#bavexa",
     imageHeight: 1086,
     imageWidth: 1448,
   },
@@ -26,7 +23,6 @@ const portfolioItems: PortfolioItem[] = [
     category: "SaaS & AI · Internal Build",
     whatIDid: "Workflow UX & frontend architecture",
     src: "/service-images/saas-ai-solutions.webp",
-    href: "/case-studies/ai-mvp-dashboard",
     imageHeight: 1086,
     imageWidth: 1448,
   },
@@ -35,40 +31,30 @@ const portfolioItems: PortfolioItem[] = [
     category: "Technology Ecommerce",
     whatIDid: "Storefront design & build",
     src: "/Portfolio/habibi-technology.webp",
-    href: "/Portfolio/habibi-technology.webp",
-    external: true,
   },
   {
     name: "Solarlink",
     category: "Solar Services Website",
     whatIDid: "Website design & lead flow",
     src: "/Portfolio/solarlink.webp",
-    href: "/Portfolio/solarlink.webp",
-    external: true,
   },
   {
     name: "Fizmo",
     category: "Product Ecommerce",
     whatIDid: "Website design & build",
     src: "/Portfolio/fizmo.webp",
-    href: "/Portfolio/fizmo.webp",
-    external: true,
   },
   {
     name: "Juniper Kids",
     category: "Kids Ecommerce",
     whatIDid: "Storefront design & build",
     src: "/Portfolio/juniper-kids.webp",
-    href: "/Portfolio/juniper-kids.webp",
-    external: true,
   },
   {
     name: "Lumea Organics",
     category: "Beauty Ecommerce",
     whatIDid: "Storefront design & build",
     src: "/Portfolio/lumea-organics.webp",
-    href: "/Portfolio/lumea-organics.webp",
-    external: true,
   },
 ];
 
@@ -77,7 +63,7 @@ export function PortfolioSection() {
     <section className="home-section portfolio-section" id="work">
       <div className="container">
         <header className="simple-section-intro">
-          <p className="simple-eyebrow">Selected Work</p>
+          <p className="simple-eyebrow">Portfolio</p>
           <h2>Digital systems, websites &amp; automation I’ve built.</h2>
           <p>
             A selection of past website, ecommerce, and automation work. Today,
@@ -94,10 +80,24 @@ export function PortfolioSection() {
 }
 
 function PortfolioRow({ items }: { items: PortfolioItem[] }) {
+  const [isPressed, setIsPressed] = useState(false);
   const duplicatedItems = [...items, ...items];
 
   return (
-    <div className="portfolio-row">
+    <div
+      className={`portfolio-row${isPressed ? " is-pressing" : ""}`}
+      onPointerCancel={() => setIsPressed(false)}
+      onPointerDown={(event) => {
+        if (event.pointerType !== "mouse" || event.button !== 0) {
+          return;
+        }
+
+        event.currentTarget.setPointerCapture(event.pointerId);
+        setIsPressed(true);
+      }}
+      onPointerUp={() => setIsPressed(false)}
+      onLostPointerCapture={() => setIsPressed(false)}
+    >
       <ul className="portfolio-track">
         {duplicatedItems.map((item, index) => {
           const isDuplicate = index >= items.length;
@@ -111,17 +111,12 @@ function PortfolioRow({ items }: { items: PortfolioItem[] }) {
               key={`${item.src}-${index}`}
               aria-hidden={isDuplicate}
             >
-              <a
-                aria-label={`View ${item.name} project`}
-                href={item.href}
-                rel={item.external ? "noopener noreferrer" : undefined}
-                tabIndex={isDuplicate ? -1 : undefined}
-                target={item.external ? "_blank" : undefined}
-              >
+              <div className="portfolio-card__content">
                 <div className="portfolio-card__image">
                   <img
                     alt={`${item.name} project by Basit Amin Bhatti`}
                     decoding="async"
+                    draggable={false}
                     height={imageHeight}
                     loading="lazy"
                     sizes="(max-width: 800px) 78vw, 29vw"
@@ -129,10 +124,6 @@ function PortfolioRow({ items }: { items: PortfolioItem[] }) {
                     srcSet={`${imageSmall} 640w, ${item.src} ${imageWidth}w`}
                     width={imageWidth}
                   />
-                  <span className="portfolio-card__view">
-                    View Project
-                    <ArrowRight aria-hidden="true" size={15} />
-                  </span>
                 </div>
                 <div className="portfolio-card__footer">
                   <h3>{item.name}</h3>
@@ -142,7 +133,7 @@ function PortfolioRow({ items }: { items: PortfolioItem[] }) {
                     <span>What I Did: {item.whatIDid}</span>
                   </p>
                 </div>
-              </a>
+              </div>
             </li>
           );
         })}
