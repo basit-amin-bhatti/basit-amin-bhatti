@@ -121,7 +121,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          timeout: 60000
+          timeout: 120000
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}
           local-dir: src/frontend/dist/
           dangerous-clean-slate: ${{ inputs.clean }}
